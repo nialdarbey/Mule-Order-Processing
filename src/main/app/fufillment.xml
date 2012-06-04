@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:ajax="http://www.mulesoft.org/schema/mule/ajax" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:jersey="http://www.mulesoft.org/schema/mule/jersey" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:jdbc="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:debugger="http://www.mulesoft.org/schema/mule/debugger" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:jbossts="http://www.mulesoft.org/schema/mule/jbossts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.0" xsi:schemaLocation="
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:ajax="http://www.mulesoft.org/schema/mule/ajax" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:jersey="http://www.mulesoft.org/schema/mule/jersey" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:jdbc="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:debugger="http://www.mulesoft.org/schema/mule/debugger" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:jbossts="http://www.mulesoft.org/schema/mule/jbossts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.0" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
-http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
 http://www.mulesoft.org/schema/mule/ajax http://www.mulesoft.org/schema/mule/ajax/current/mule-ajax.xsd 
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
-http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/jersey/current/mule-jersey.xsd 
 http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd 
+http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/jersey/current/mule-jersey.xsd 
 http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/3.2/mule-data-mapper.xsd 
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
 http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd 
@@ -36,6 +36,19 @@ http://www.mulesoft.org/schema/mule/jbossts http://www.mulesoft.org/schema/mule/
     <ee:object-store-caching-strategy name="Caching_Strategy" keyGenerationExpression="#[payload.productId]" doc:name="Caching Strategy">
         <in-memory-store/>
     </ee:object-store-caching-strategy>
+    <flow name="manufacturers" doc:name="manufacturers">
+        <ajax:inbound-endpoint channel="/orders/manufacturers" responseTimeout="10000" connector-ref="ajaxServer" doc:name="/orders/manufacturers"/>
+        <expression-transformer expression="#['[&quot;Samsung&quot;,&quot;Philips&quot;,&quot;Sony&quot;]']" doc:name="Create Manufacturers"/>
+    </flow>
+    <flow name="orderRequest" doc:name="orderRequest">
+        <ajax:inbound-endpoint channel="/orders/request" responseTimeout="10000" doc:name="/orders/request"/>
+        <json:json-to-object-transformer doc:name="JSON to Object"/>
+        <mulexml:object-to-xml-transformer doc:name="Object to XML"/>
+        <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="JsonRequestToSoapEnvelope.xsl" doc:name="Xml to Soap Envelope">
+            <mulexml:context-property key="request" value="#[payload]"/>
+        </mulexml:xslt-transformer>
+        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="1080" path="orders" doc:name="/orders"/>
+    </flow>
     <flow name="orderService" doc:name="orderService">
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="1080" path="orders" doc:name="/orders" doc:description="Process HTTP reqests or responses."/>
         <cxf:jaxws-service serviceClass="com.mulesoft.se.orders.IProcessOrder" doc:name="Order WebService" doc:description="Make a web service available via CXF"/>
@@ -153,18 +166,5 @@ return "db populated";]]></scripting:text>
         <catch-exception-strategy doc:name="Catch Exception Strategy">
             <expression-transformer expression="table already populated" doc:name="'table already populated'"/>
         </catch-exception-strategy>
-    </flow>
-    <flow name="manufacturers" doc:name="manufacturers">
-        <ajax:inbound-endpoint channel="/orders/manufacturers" responseTimeout="10000" connector-ref="ajaxServer" doc:name="/orders/manufacturers"/>
-        <expression-transformer expression="#['[&quot;x&quot;,&quot;y&quot;,&quot;z&quot;]']" doc:name="Expression"/>
-    </flow>
-    <flow name="orderRequest" doc:name="orderRequest">
-        <ajax:inbound-endpoint channel="/orders/request" responseTimeout="10000" doc:name="/orders/request"/>
-        <json:json-to-object-transformer doc:name="JSON to Object"/>
-        <mulexml:object-to-xml-transformer doc:name="Object to XML"/>
-        <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="JsonRequestToSoapEnvelope.xsl" doc:name="XSLT">
-            <mulexml:context-property key="request" value="#[payload]"/>
-        </mulexml:xslt-transformer>
-        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="1080" path="orders" doc:name="HTTP"/>
     </flow>
 </mule>
