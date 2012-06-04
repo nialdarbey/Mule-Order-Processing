@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="nialdarbey" created="Wed May 02 09:25:54 GMT-03:00 2012" guiVersion="3.3.0.M2" id="1335994753184" licenseCode="Unlicensed" licenseType="Unknown" modified="Wed May 02 09:25:54 GMT-03:00 2012" modifiedBy="nialdarbey" name="OrderResponseToPurchaseReceipt" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="OrderResponse" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/id" label="id" name="id" type="string"/>
+<Field __sourcePath="{}/object/price" label="price" name="price" type="string"/>
+<Field __sourcePath="{}/object/result" label="result" name="result" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="Metadata1">
+<Record fieldDelimiter="|" name="PurchaseReceipt" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/id" label="id" name="id" type="string"/>
+<Field __sourcePath="{}/object/status" label="status" name="status" type="string"/>
+<Field __sourcePath="{}/object/totalPrice" label="totalPrice" name="totalPrice" type="number"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="JAVA Reader" guiWidth="0" guiX="20" guiY="20" id="BEAN_READER0" type="BEAN_READER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath=".">
+  <Mapping cloverField="id" trim="true" xpath="id"/>
+  <Mapping cloverField="price" trim="true" xpath="price"/>
+  <Mapping cloverField="result" trim="true" xpath="result"/>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object><typed-object-ref type-ref="com.mulesoft.se.samsung.OrderResponse"/><typed-object type="com.mulesoft.se.samsung.OrderResponse"><typed-object-ref name="id" type-ref="java.lang.String"/><typed-object-ref name="price" type-ref="java.lang.String"/><typed-object-ref name="result" type-ref="java.lang.String"/></typed-object><typed-object type="java.lang.String"/></schema-object>]]></attr>
+</Node>
+<Node enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="JAVA Writer" guiWidth="0" guiX="460" guiY="20" id="BEAN_WRITER0" type="BEAN_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <id>$0.id</id>
+  <status>$0.status</status>
+  <totalPrice>$0.totalPrice</totalPrice>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JAVA]]></attr>
+<attr name="schema"><![CDATA[<?xml version="1.0" encoding="UTF-8"?><schema-object><typed-object-ref type-ref="com.mulesoft.se.orders.PurchaseReceipt"/><typed-object type="com.mulesoft.se.orders.PurchaseReceipt"><typed-object-ref name="id" type-ref="java.lang.String"/><typed-object-ref name="status" type-ref="com.mulesoft.se.orders.Status"/><typed-object-ref name="totalPrice" type-ref="float"/></typed-object><typed-object type="java.lang.String"/><typed-object type="float"/><typed-object type="com.mulesoft.se.orders.Status"/></schema-object>]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="object_to_object" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+	$out.0.status = $in.0.result;
+	$out.0.totalPrice = (isnull($in.0.price) ? 0 : str2double($in.0.price));
+	$out.0.__id = $in.0.__id;
+	$out.0.id = $in.0.id;
+
+	return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Edge fromNode="BEAN_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+<Edge fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="Metadata1" outPort="Port 0 (out)" toNode="BEAN_WRITER0:0"/>
+</Phase>
+</Graph>

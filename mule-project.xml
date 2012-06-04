@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-project xmlns="http://www.mulesoft.com/tooling/project" runtimeId="org.mule.servers.3.3.0.EE">
+    <name>Orders</name>
+    <description>Process an order from a web service. Split the order into individual items and route the items to corresponding manufacturers for fufillment. In addition, a contact is added to Salesforce for each processed order. A separate flow deploys a REST service that allows manufacturers to view the list of ordered items.</description>
+</mule-project>
