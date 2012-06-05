@@ -18,7 +18,7 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.mulesoft.org/schema/mule/debugger http://www.mulesoft.org/schema/mule/debugger/current/mule-debugger.xsd 
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd 
 http://www.mulesoft.org/schema/mule/jbossts http://www.mulesoft.org/schema/mule/jbossts/current/mule-jbossts.xsd ">
-    <ajax:connector name="ajaxServer" serverUrl="http://0.0.0.0:8090/orders" resourceBase="${app.home}/docroot" jsonCommented="true" doc:name="ajaxServer"/>
+    <ajax:connector name="ajaxServer" serverUrl="http://0.0.0.0:8090/orders" resourceBase="${app.home}/docroot" doc:name="ajaxServer"/>
     <cxf:configuration initializeStaticBusInstance="false" doc:name="CXF Configuration" doc:description="Global CXF Configuration"/>
     <data-mapper:config name="OrderItemToOrderRequest" transformationGraphPath="orderitemtoorderrequest_1.grf" doc:name="OrderItemToOrderRequest"/>
     <data-mapper:config name="OrderResponseToPurchaseReceipt" transformationGraphPath="orderresponsetopurchasereceipt.grf" doc:name="OrderResponseToPurchaseReceipt"/>
@@ -152,7 +152,7 @@ return receipt;]]></scripting:text>
         <smtp:outbound-endpoint host="localhost" port="25" responseTimeout="10000" doc:name="Send Email to Operations"/>
     </sub-flow>
     <flow name="databaseInitialisation" doc:name="databaseInitialisation">
-        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8081" path="populate" doc:name="HTTP"/>
+        <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="8091" path="populate" doc:name="HTTP"/>
         <scripting:component doc:name="Create Tables">
             <scripting:script engine="Groovy">
                 <scripting:text><![CDATA[jdbcConnector = muleContext.getRegistry().lookupConnector("JDBCConnector");

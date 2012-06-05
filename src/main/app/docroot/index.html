@@ -6,6 +6,75 @@
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
 <script type="text/javascript" src="mule-resource/js/mule.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$.ajax({
+			url : "http://localhost:8091/populate"
+		});
+		mule.rpc("/orders/manufacturers", "", manufacturersResponse);
+		tabs = $("#tabs").tabs({
+			selected : 0
+		});
+		$('.button').button();
+
+		$('#addItemButton').click(function() {
+			$('#orderItemTable tbody').append('<tr><td class="manufacturer">' + '</td><td class="name">' + $("#productName").val() + '</td><td class="productId">' + $("#productId").val() + '</td><td class="quantity">' + $("#quantity").val() + '</td><td><a class="deleteButton" style="background-color: red; color:white; padding: 2px 5px;">Delete</a></tr>');
+			$('.deleteButton')
+				.click(function() {
+					$(this).parent('td').parent('tr').remove();
+				});
+			$('#newItem input').val('');
+		});
+		$('#submitButton').click(function() {
+			var order = {
+				orderId: $('#orderId').val(),
+				customer: {
+					firstName: $('#firstName').val(),
+					lastName: $('#lastName').val(),
+					address: $('#address').val()
+				},
+				orderItems: []
+			}
+			$('#orderItemTable tbody tr').each(function() {
+				var manufacturer = $('td.manufacturer', this)[0].innerHTML;
+				var name = $('td.name', this)[0].innerHTML;
+				var productId = $('td.productId', this)[0].innerHTML;
+				var quantity = $('td.quantity', this)[0].innerHTML;
+				orderRequest.orderItems.push({
+					"manufacturer" : manufacturer,
+					"name" : name,
+					"productId" : productId,
+					"quantity" : quantity
+				})
+				
+			})
+			var request = JSON.stringify(order);
+			mule.rpc("/orders/request", request, orderResponse);
+		});
+		$('#resetButton').click(function() {
+			$('#main input').val('');
+		});
+		function manufacturersResponse(message, error) {
+			if (error != null) {
+				alert(message.data);
+				products = JSON.parse(message.data);
+				alert(products);
+				for (i = 0; i < products.length; i++) {
+					$('#manufacturerSelect').append(
+							'<option value=' + '"' + products[i] + '">' + products[i]
+									+ '</option>')
+				}
+			} else {
+				alert(error.data);
+			}	
+		}
+		function orderResponse(message) {
+			tabs.tabs('select', 1);
+			alert(message.data);
+		}
+
+	});
+</script>
 </head>
 <body>
 
@@ -86,67 +155,5 @@
 </div>
 </div>
 
-
-<script>
-	$.ajax({
-		url : "http://localhost:9080/populate"
-	})
-	mule.rpc("/orders/manufacturers", "", manufacturersResponse);
-	tabs = $("#tabs").tabs({
-		selected : 0
-	});
-	$('.button').button();
-
-	$('#addItemButton').click(function() {
-		$('#orderItemTable tbody').append('<tr><td class="manufacturer">' + '</td><td class="name">' + $("#productName").val() + '</td><td class="productId">' + $("#productId").val() + '</td><td class="quantity">' + $("#quantity").val() + '</td><td><a class="deleteButton" style="background-color: red; color:white; padding: 2px 5px;">Delete</a></tr>');
-		$('.deleteButton')
-			.click(function() {
-				$(this).parent('td').parent('tr').remove();
-			});
-		$('#newItem input').val('');
-	})
-	$('#submitButton').click(function() {
-		var order = {
-			orderId: $('#orderId').val(),
-			customer: {
-				firstName: $('#firstName').val(),
-				lastName: $('#lastName').val(),
-				address: $('#address').val()
-			},
-			orderItems: []
-		}
-		$('#orderItemTable tbody tr').each(function() {
-			var manufacturer = $('td.manufacturer', this)[0].innerHTML;
-			var name = $('td.name', this)[0].innerHTML;
-			var productId = $('td.productId', this)[0].innerHTML;
-			var quantity = $('td.quantity', this)[0].innerHTML;
-			orderRequest.orderItems.push({
-				"manufacturer" : manufacturer,
-				"name" : name,
-				"productId" : productId,
-				"quantity" : quantity
-			})
-			
-		})
-		var request = JSON.stringify(order);
-		mule.rpc("/orders/request", request, orderResponse);
-	})
-	$('#resetButton').click(function() {
-		$('#main input').val('');
-	})
-	function manufacturersResponse(message) {
-		products = JSON.parse("[" + message.data + "]");
-		for (i = 0; i < products.length; i++) {
-			$('#manufacturerSelect').append(
-					'<option value=' + '"' + products[i] + '">' + products[i]
-							+ '</option>')
-		}
-	}
-	function orderResponse(message) {
-		tabs.tabs('select', 1);
-		alert(message.data);
-	}
-
-</script>
 </body>
 </html>
