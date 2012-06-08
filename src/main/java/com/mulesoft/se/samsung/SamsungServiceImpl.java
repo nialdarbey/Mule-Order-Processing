@@ -10,7 +10,8 @@ public class SamsungServiceImpl implements SamsungService {
 		OrderResponse orderResponse = new OrderResponse();
 		orderResponse.setId("1");
 		orderResponse.setResult("ACCEPTED");
-		orderResponse.setPrice("2550");
+		Integer price = 2550 * orderRequest.getQuantity();
+		orderResponse.setPrice(price.toString());
 		return orderResponse;
 	}
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="fufillment">
-    <global-element type="http://www.mulesoft.org/schema/mule/jms/activemq-xa-connector" name="Active MQ" entity-id="0b18dc84-3d4b-462d-98b4-dfcda2cbb253">
+    <global-element type="http://www.mulesoft.org/schema/mule/jms/activemq-xa-connector" name="Active MQ" entity-id="70efe39c-93ae-403a-8330-867c271637d9">
         <properties>
             <property value="Active_MQ" name="name"/>
             <property name="specification"/>
@@ -33,7 +33,7 @@
             <property value="http://www.mulesoft.org/schema/mule/jms/activemq-xa-connector" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
         </properties>
     </global-element>
-    <global-element type="org.mule.tooling.ui.modules.core.global.ajaxConnector" name="ajaxServer" entity-id="392ef4b0-6d68-4664-9504-df11e702b6c8">
+    <global-element type="org.mule.tooling.ui.modules.core.global.ajaxConnector" name="ajaxServer" entity-id="530dcf36-dcd5-45d3-aa84-d71b6c8dd158">
         <properties>
             <property value="ajaxServer" name="name"/>
             <property value="http://0.0.0.0:8090/orders" name="serverUrl"/>
@@ -48,7 +48,7 @@
             <property name="multiFrameInterval"/>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/cxf/configuration" name="CXF Configuration" entity-id="b0591260-1bf7-45f7-8954-a028b2d539f7">
+    <global-element type="http://www.mulesoft.org/schema/mule/cxf/configuration" name="CXF Configuration" entity-id="5c172e1d-3a82-499f-b14b-f5154f96c371">
         <properties>
             <property name="configurationLocation"/>
             <property name="enableMuleSoapHeaders"/>
@@ -56,19 +56,19 @@
         </properties>
         <description>Global CXF Configuration</description>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="OrderItemToOrderRequest" entity-id="380d933f-bb48-4a0a-980e-dbf98eb21437">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="OrderItemToOrderRequest" entity-id="d7332765-2fcc-42e2-8ffe-a9326aa23fd3">
         <properties>
             <property value="OrderItemToOrderRequest" name="name"/>
             <property value="orderitemtoorderrequest_1.grf" name="transformationGraphPath"/>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="OrderResponseToPurchaseReceipt" entity-id="f1757e5d-4ea3-4caa-93c0-48996d64708d">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="OrderResponseToPurchaseReceipt" entity-id="576111da-cc31-40f7-98b8-a2101e074f87">
         <properties>
             <property value="OrderResponseToPurchaseReceipt" name="name"/>
             <property value="orderresponsetopurchasereceipt.grf" name="transformationGraphPath"/>
         </properties>
     </global-element>
-    <global-element type="http://www.springframework.org/schema/beans/bean" name="Bean" entity-id="f19ebc39-951b-4ff4-9318-2feb2df8c896">
+    <global-element type="http://www.springframework.org/schema/beans/bean" name="Bean" entity-id="9e4bb3bc-f00e-44d3-8480-924b220963ad">
         <properties>
             <property value="Derby_Data_Source" name="id"/>
             <property name="name"/>
@@ -96,7 +96,7 @@
             </property-collection>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/jdbc/connector" name="JDBCConnector" entity-id="84506e40-f5d2-4be2-a90f-0759661f3d97">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/jdbc/connector" name="JDBCConnector" entity-id="d697f5b9-c619-4184-a3b9-98fca5dfb0d4">
         <properties>
             <property value="JDBCConnector" name="name"/>
             <property value="Derby_Data_Source" name="dataSource-ref to JDBC DataSource"/>
@@ -111,13 +111,13 @@
             <property value="0" name="pollingFrequency"/>
         </properties>
     </global-element>
-    <global-unknown entity-id="650537d5-1e80-431e-8efb-9ca1f0ee55c2">
+    <global-unknown entity-id="c430f588-b813-4243-8f61-7e2cfd519c17">
         <content>&lt;jbossts:transaction-manager xmlns:jbossts=&quot;http://www.mulesoft.org/schema/mule/jbossts&quot;&gt;  
         &lt;property xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot; key=&quot;com.arjuna.ats.arjuna.coordinator.defaultTimeout&quot; value=&quot;600&quot;/&gt;  
         &lt;property xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot; key=&quot;com.arjuna.ats.arjuna.coordinator.txReaperTimeout&quot; value=&quot;1000000&quot;/&gt; 
     &lt;/jbossts:transaction-manager&gt;</content>
     </global-unknown>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/core/object-store-caching-strategy" name="Caching Strategy" entity-id="387290c1-253f-44e6-9051-8e68d8d9d565">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/core/object-store-caching-strategy" name="Caching Strategy" entity-id="236be422-3698-4246-b3b0-7f1bd76f03b2">
         <properties>
             <property value="Caching_Strategy" name="name"/>
             <property name="eventKeyLabel"/>
@@ -133,55 +133,55 @@
             <property-collection name="@http://www.mulesoft.org/schema/mule/core/in-memory-store;0"/>
         </properties>
     </global-element>
-    <global-unknown entity-id="af52249f-3705-4fe3-aaf2-6c7af7c6f171">
+    <global-unknown entity-id="6fac1d9b-2f5f-49ca-a795-abdabe2f74bb">
         <content>&lt;mulexml:namespace-manager xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; includeConfigNamespaces=&quot;true&quot;&gt;  
         &lt;mulexml:namespace prefix=&quot;soap&quot; uri=&quot;http://schemas.xmlsoap.org/soap/envelope/&quot;/&gt;  
         &lt;mulexml:namespace prefix=&quot;ord&quot; uri=&quot;http://orders.se.mulesoft.com/&quot;/&gt; 
     &lt;/mulexml:namespace-manager&gt;</content>
     </global-unknown>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="Json to Xml" entity-id="e12d34ee-8638-4ef3-b657-8544b216e7f9">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="Json to Xml" entity-id="d2fadf9a-5c01-41e6-a844-e3a2c71df225">
         <properties>
             <property value="Json to Xml" name="name"/>
             <property value="json_to_xml.grf" name="transformationGraphPath"/>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="Json to Xml" entity-id="7f7d0c21-5811-4ff8-9832-5068c4cd71c0">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="Json to Xml" entity-id="32db697f-c15e-4b54-8cf0-b3df476e1b02">
         <properties>
             <property value="Json to Xml" name="name"/>
             <property value="json_to_xml.grf" name="transformationGraphPath"/>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="Json to Xml" entity-id="464d3937-7478-4f27-b467-05847f2b3c33">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="Json to Xml" entity-id="72441645-a098-4109-bcc7-aef7dba42b98">
         <properties>
             <property value="Json to Xml" name="name"/>
             <property value="json_to_xml.grf" name="transformationGraphPath"/>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummary to Json" entity-id="7ca48679-7caa-4b8d-806d-18660d7ae223">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummary to Json" entity-id="1cfbdfbb-c399-4af1-9402-c592032d3785">
         <properties>
             <property value="orderSummary to Json" name="name"/>
             <property value="ordersummary_to_json.grf" name="transformationGraphPath"/>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummary to Json" entity-id="c14f06bb-3507-476a-aae4-40df3c3d5c49">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummary to Json" entity-id="c83f1361-9906-4d15-9481-e7c2acd5e743">
         <properties>
             <property value="orderSummary to Json" name="name"/>
             <property value="ordersummary_to_json_1.grf" name="transformationGraphPath"/>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummary to Json" entity-id="9809902f-9e1e-473e-b342-160706ddca70">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummary to Json" entity-id="f3950330-54d0-4534-a1ce-dd8fc7d8d8e1">
         <properties>
             <property value="orderSummary to Json" name="name"/>
             <property value="ordersummary_to_json_2.grf" name="transformationGraphPath"/>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummaryToJson" entity-id="24d31f59-54ba-4f89-b0d3-c9b06554c0fb">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummaryToJson" entity-id="7d5f2c14-f1c9-4c99-9660-a1aae7d27b73">
         <properties>
             <property value="orderSummaryToJson" name="name"/>
             <property value="ordersummarytojson.grf" name="transformationGraphPath"/>
         </properties>
     </global-element>
-    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummaryToJson" entity-id="87d294bc-57dc-455b-8100-6a8c3d171939">
+    <global-element type="http://www.mulesoft.org/schema/mule/ee/data-mapper/config" name="orderSummaryToJson" entity-id="0756e54d-8fb6-4875-9cd9-c6cc2e866994">
         <properties>
             <property value="orderSummaryToJson" name="name"/>
             <property value="ordersummarytojson_1.grf" name="transformationGraphPath"/>
@@ -196,8 +196,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="41797ac7-9572-4d2f-be8a-fc1f0ada87e0">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/orders/manufacturers" entity-id="9a908d93-387c-4dd2-b839-b94fb73d8de9">
+        <lane hadOnlyOneElement="false" entity-id="c64ee90f-32e1-40b7-8960-48505bbe7763">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/orders/manufacturers" entity-id="bca827a4-72e4-4a73-bd06-e75641eec24d">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="/orders/manufacturers" name="channel"/>
@@ -215,7 +215,7 @@
                     <property name="transformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Create Manufacturers" entity-id="ee010023-0e75-42b5-aa2e-38f21f1043fc">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="Create Manufacturers" entity-id="f54ce34c-a8ab-4554-9ce1-40051a1f257e">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -236,8 +236,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="2fca831e-7d57-4ea8-83ac-8aafc253fdb4">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/orders/request" entity-id="7551c5f1-ded8-46a6-bbab-bfb39c50c3e4">
+        <lane hadOnlyOneElement="false" entity-id="a5ba9f71-d63f-45e4-9f42-2799ac146032">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/orders/request" entity-id="49e822dd-712c-4890-bb7e-475ab50642aa">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="/orders/request" name="channel"/>
@@ -255,7 +255,7 @@
                     <property name="transformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="Data-mapper" entity-id="32507afa-1f47-400d-a0d3-2e2d25fd0c66">
+            <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="Data-mapper" entity-id="3a0e16db-b5d1-4e84-b751-a7bf72455167">
                 <properties>
                     <property value="Json to Xml" name="config-ref"/>
                     <property value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
@@ -263,7 +263,7 @@
                     <property name="input-ref"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="9dffd774-6a6b-4d33-8c97-e2f6fbe8ea3e">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="6d613f68-ac3f-419e-b373-8122424c3c93">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -271,7 +271,7 @@
                     <property name="mimeType"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/xml/xslt-transformer" name="Xml to Soap Envelope" entity-id="34d2ef1a-ba79-4f38-8796-89546ea87b33">
+            <pattern type="http://www.mulesoft.org/schema/mule/xml/xslt-transformer" name="Xml to Soap Envelope" entity-id="f6a02961-646b-4faf-a938-c9d05d48d4cd">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -285,7 +285,7 @@
                     <property name="outputEncoding"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="86b74b1e-9071-4c55-ba3d-fd1693872d2e">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="0f62c4c7-031f-4335-bebb-3b51be4346ee">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -293,14 +293,14 @@
                     <property name="mimeType"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="05d8c3a9-6778-4577-8349-c6cbf12f57a0">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="897dfbac-27d2-4417-9b0e-6e3a0980269e">
                 <properties>
                     <property value="#[payload:]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/orders" entity-id="018171e0-e505-45a8-9ee1-a1e44de90add">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/orders" entity-id="c8123c0a-d10a-4482-93a0-6c3c7d7cbaf9">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -328,7 +328,7 @@
                     <property name="keep-alive"/>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="d99425fd-3af0-434f-9817-48a8859a75cf">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="626699fa-d56f-474a-b173-468d2add790b">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -336,7 +336,7 @@
                     <property name="mimeType"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/xml/xslt-transformer" name="Xml to Soap Envelope" entity-id="58ed63da-d2a7-4b45-9f46-4029f87de77d">
+            <pattern type="http://www.mulesoft.org/schema/mule/xml/xslt-transformer" name="Xml to Soap Envelope" entity-id="912a114b-bfd0-4aba-8ae0-a5222ca41562">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -350,7 +350,7 @@
                     <property name="outputEncoding"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="3423a847-023b-460a-8cad-6644419cea42">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="4680e104-6336-4c22-a6da-3ecee1da2406">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -358,7 +358,14 @@
                     <property name="mimeType"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="Data-mapper" entity-id="2e4a92c4-e69f-420f-a580-3a29f7b27dd7">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="a8ebb9a1-6dfb-4d9f-a658-4abd0cc215d6">
+                <properties>
+                    <property value="Before Transformation: #[payload:]" name="message"/>
+                    <property value="ERROR" name="level"/>
+                    <property name="category"/>
+                </properties>
+            </pattern>
+            <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="Data-mapper" entity-id="b0f06272-e892-447c-b38e-c69997459c1e">
                 <properties>
                     <property value="orderSummaryToJson" name="config-ref"/>
                     <property value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
@@ -366,14 +373,7 @@
                     <property name="input-ref"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="3c40e6a5-cb49-4ca2-8e7a-9b85d06a2d6d">
-                <properties>
-                    <property value="HERE IS THE TRANSFORMED XML #[payload:]" name="message"/>
-                    <property value="ERROR" name="level"/>
-                    <property name="category"/>
-                </properties>
-            </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="27dd7e0b-a5dd-4574-81db-29d12d1d7900">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="f225e73a-d40a-4b2d-b70a-a885dafad4eb">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -381,9 +381,9 @@
                     <property name="mimeType"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="f358dbd0-bb31-44b9-a1b9-c52d393fdb67">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="112dfa49-b82c-4b17-af7d-4c88625363fd">
                 <properties>
-                    <property value="Herere she is….. #[payload:]" name="message"/>
+                    <property value="Result of transformation….. #[payload:]" name="message"/>
                     <property value="ERROR" name="level"/>
                     <property name="category"/>
                 </properties>
@@ -399,8 +399,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="fd8f5844-4053-4204-83b6-1cfe4a35df0f">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/orders/soap" entity-id="e47136e0-de48-4232-9241-80bcecf29b75">
+        <lane hadOnlyOneElement="false" entity-id="028e45df-a336-4573-aefd-545ff43a62b1">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="org.mule.tooling.ui.modules.core.ajax.AJAX" name="/orders/soap" entity-id="7f709304-9b36-4e02-add4-936847fcf8c4">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="/orders/soap" name="channel"/>
@@ -418,7 +418,7 @@
                     <property name="transformer-refs"/>
                 </properties>
             </endpoint>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/orders" entity-id="1fe81b61-7030-4868-962c-d7e98ec971c4">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/orders" entity-id="d42003ab-0676-41ce-8f00-bfcf6c770c90">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -446,7 +446,7 @@
                     <property name="keep-alive"/>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="0b13227a-d107-4057-8f03-0680ca765823">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="8db07e41-9368-4014-817b-e6bf826a74d0">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -465,8 +465,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="b425b5f8-75b2-491b-8d69-b04e8466cb1f">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/orders" entity-id="c87d1986-c34f-44ec-9872-23194bc7ee3a">
+        <lane hadOnlyOneElement="false" entity-id="741f7db0-8d7e-488a-a34d-b252951f0522">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/orders" entity-id="8f560c7c-5258-4a2a-a436-790caa7f0521">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -495,7 +495,7 @@
                 </properties>
                 <description>Process HTTP reqests or responses.</description>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="Order WebService" entity-id="1cd1c640-1f28-4f2f-920e-09c25e5889e6">
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="Order WebService" entity-id="64598e47-542b-45d1-baa7-09d3cdaf1a38">
                 <properties>
                     <property name="configuration-ref"/>
                     <property value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
@@ -512,49 +512,49 @@
                 </properties>
                 <description>Make a web service available via CXF</description>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="d55419a5-e928-4507-a227-f088f15baf10">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="84186eb7-c717-478d-8c7d-58f17c5af423">
                 <properties>
                     <property value="#[payload.toString()] #[payload.getClass()]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="totalValue = 0" entity-id="e5bfbbc9-ce80-4a00-b169-e91a5ff8a4b3">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="totalValue = 0" entity-id="dd43bf10-541a-4efe-9f4f-6aea6967cc39">
                 <properties>
                     <property value="http://www.mulesoft.org/schema/mule/core/set-session-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
                     <property value="totalValue" name="variableName"/>
                     <property value="0" name="value"/>
                 </properties>
             </pattern>
-            <scope type="http://www.mulesoft.org/schema/mule/core/foreach" name="For each Order Item" entity-id="1fc411fe-fdf4-4c88-9110-b96f564e5bae">
+            <scope type="http://www.mulesoft.org/schema/mule/core/foreach" name="For each Order Item" entity-id="02ca8ebb-a5e1-4b31-9ca2-a8278b9a2d62">
                 <properties>
                     <property value="#[payload.orderItems]" name="collection"/>
                     <property name="counterVariableName"/>
                     <property name="batchSize"/>
                     <property name="rootMessageVariableName"/>
                 </properties>
-                <compartment entity-id="a1dcd8b8-d204-43bd-9a2a-15ba56944d91">
-                    <lane hadOnlyOneElement="false" entity-id="7b7e3c63-b34c-45bb-8b34-a5b8285c0cef">
-                        <scope type="http://www.mulesoft.org/schema/mule/core/enricher" name="Enrich with purchase receipt" entity-id="13b87025-9a8e-421a-aa48-ebf12d342549">
+                <compartment entity-id="51503a1a-78cb-47b4-8172-481d7e901cac">
+                    <lane hadOnlyOneElement="false" entity-id="bdbad7f2-150c-4f14-8f28-d0f7e9bf0c60">
+                        <scope type="http://www.mulesoft.org/schema/mule/core/enricher" name="Enrich with purchase receipt" entity-id="bba7e9a7-895b-4b78-9458-56a638dbd641">
                             <properties>
 <property name="source"/>
 <property value="#[rootMessage.payload.orderItems[counter - 1].purchaseReceipt]" name="target"/>
                             </properties>
-                            <compartment entity-id="520b4383-3e08-433d-a60b-b3558f66a309">
-<lane hadOnlyOneElement="false" entity-id="b78724ba-0888-4598-b6b7-e80bf60904b7">
-    <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="717f9934-3b5b-443b-9416-eafbd0f978b9">
+                            <compartment entity-id="b2c3a13b-90b2-40dd-a666-ac673c48512e">
+<lane hadOnlyOneElement="false" entity-id="9c04e7d0-5f8c-42c6-bf38-532d74de9537">
+    <splitter type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="b4efbb1a-dee4-4f61-a18d-1b48079e9280">
         <properties>
-            <property-collection name="b01c5256-6120-4189-b94b-2af9c8949de6">
-                <property value="true" name="choice.otherwise"/>
-            </property-collection>
-            <property-collection name="0e1596cb-22a6-4730-8ce4-822ad8cd6216">
+            <property-collection name="50ec5c83-2fc2-4218-a2a2-0da066df17a3">
                 <property value="#[payload.manufacturer == 'Samsung']" name="choice.expression"/>
             </property-collection>
+            <property-collection name="c0472574-ca9b-4f73-90ce-ad80007cc2f3">
+                <property value="true" name="choice.otherwise"/>
+            </property-collection>
         </properties>
-        <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="7cf23216-0bf5-4c19-b8d3-f6ee4b4f6619"/>
-        <compartment entity-id="ed048b0b-9b4b-4fac-b540-87ad5e303563">
-            <lane hadOnlyOneElement="false" entity-id="0e1596cb-22a6-4730-8ce4-822ad8cd6216">
-                <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Dispatch to samsungOrder" entity-id="d9b9038a-1dde-47bf-9ae9-dc161292b3fc">
+        <pattern type="org.mule.tooling.ui.modules.core.pattern.cbr" name="Choice" entity-id="ab37f705-ae89-487b-8104-36fa0068b471"/>
+        <compartment entity-id="dbd29e35-edd1-4462-b97f-56031a05a6ea">
+            <lane hadOnlyOneElement="false" entity-id="50ec5c83-2fc2-4218-a2a2-0da066df17a3">
+                <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Dispatch to samsungOrder" entity-id="0803d8a3-0063-4bb0-9a6d-d80ad4e3ecb5">
                     <properties>
                         <property value="one-way" name="exchange-pattern"/>
                         <property value="request-response" name="exchange-pattern"/>
@@ -573,8 +573,8 @@
                     </properties>
                 </endpoint>
             </lane>
-            <lane hadOnlyOneElement="false" entity-id="b01c5256-6120-4189-b94b-2af9c8949de6">
-                <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jms/endpoint" name="Dispatch to inhouseOrder" entity-id="f9794c38-f5a1-4b33-96fb-d8866d747fd5">
+            <lane hadOnlyOneElement="false" entity-id="c0472574-ca9b-4f73-90ce-ad80007cc2f3">
+                <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/jms/endpoint" name="Dispatch to inhouseOrder" entity-id="d5f4b00a-aeb7-4f1f-a3b1-ee217184a347">
                     <properties>
                         <property value="one-way" name="exchange-pattern"/>
                         <property value="request-response" name="exchange-pattern"/>
@@ -604,7 +604,7 @@
                     </lane>
                 </compartment>
             </scope>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Dispatch to audit" entity-id="37bf0757-2a2c-484f-8583-511ccc3d9ba5">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="Dispatch to audit" entity-id="0182296f-a958-409c-856f-8a192e4ebb06">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="one-way" name="exchange-pattern"/>
@@ -622,15 +622,15 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="dd8e058f-9015-469f-ba68-1631f63caf6f">
+            <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="a90ec601-5e93-44bd-a023-b9c5c6ebc6f1">
                 <properties>
                     <property name=""/>
                     <property name="when"/>
                     <property name="enableNotifications"/>
                 </properties>
-                <compartment entity-id="b0aaef5d-5ce5-4538-b729-4cc91a5b10f9">
-                    <lane hadOnlyOneElement="false" entity-id="d968daba-5596-4b53-a3a6-beafd071a11e">
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invoke defaultErrorHandler" entity-id="1490ab31-6a9a-4347-a86e-e0c9fee7892e">
+                <compartment entity-id="01613647-3c72-49ff-a743-59c69e5a278a">
+                    <lane hadOnlyOneElement="false" entity-id="52d08d39-d759-4694-ac9e-4a6da08c571d">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invoke defaultErrorHandler" entity-id="4a5c0ced-5d09-4ef1-aac8-3e80129f8294">
                             <properties>
 <property value="defaultErrorHandler" name="name"/>
                             </properties>
@@ -649,8 +649,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="0e2de7a9-49e5-44d9-aa0f-f0b839b93f5e">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="samsungOrder" entity-id="55cd62a0-06ba-4dcb-9993-11360fe2c8e2">
+        <lane hadOnlyOneElement="false" entity-id="c8e37adc-afc5-4e8c-8ad4-8267855f55fd">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="samsungOrder" entity-id="977d8170-f67f-4469-bde9-43b2882eaa7e">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -668,7 +668,7 @@
                     <property name="responseTransformer-refs"/>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="OrderItem to OrderRequest" entity-id="b0184814-d506-4e4b-a423-a203a21ff354">
+            <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="OrderItem to OrderRequest" entity-id="d3264cbb-d074-46b9-936c-54cbdd15d2ad">
                 <properties>
                     <property value="OrderItemToOrderRequest" name="config-ref"/>
                     <property value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
@@ -676,12 +676,12 @@
                     <property name="input-ref"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invoke Samsung WebService" entity-id="2a4a95b8-3c0b-460c-91f9-62cc8be8c2ee">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invoke Samsung WebService" entity-id="8ce2ae6f-3f44-48ab-bed3-a590c87f2a8b">
                 <properties>
                     <property value="samsungWebServiceClient" name="name"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/message-filter" name="Filter on 200 OK" entity-id="fc4bc178-a9b1-409d-a131-b2049052672c">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/message-filter" name="Filter on 200 OK" entity-id="beb8a594-0369-4c28-868d-e80bfb577674">
                 <properties>
                     <property name="onUnaccepted"/>
                     <property value="true" name="throwOnUnaccepted"/>
@@ -692,14 +692,14 @@
                     </property-collection>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="totalValue += price" entity-id="1140864c-805c-4478-8760-37b1b23b6163">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="totalValue += price" entity-id="dc678c7d-e5bc-44af-9c60-534b25d0236b">
                 <properties>
                     <property value="http://www.mulesoft.org/schema/mule/core/set-session-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
                     <property value="totalValue" name="variableName"/>
                     <property value="#[totalValue + payload.price]" name="value"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="OrderResponse to PurchaseReceipt" entity-id="4602e2ce-3a0f-4f88-ad53-2b7fa6f9c4da">
+            <pattern type="http://www.mulesoft.org/schema/mule/ee/data-mapper/data-mapper-connector" name="OrderResponse to PurchaseReceipt" entity-id="c1ddf086-e643-493f-a713-c20f01b3200b">
                 <properties>
                     <property value="OrderResponseToPurchaseReceipt" name="config-ref"/>
                     <property value="http://www.mulesoft.org/schema/mule/ee/data-mapper/transform" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
@@ -707,15 +707,15 @@
                     <property name="input-ref"/>
                 </properties>
             </pattern>
-            <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="a91d3860-9cb9-46e7-880f-ee3069dc20f0">
+            <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="8f8ecc53-b242-46de-be27-a552285d8c28">
                 <properties>
                     <property name=""/>
                     <property name="when"/>
                     <property name="enableNotifications"/>
                 </properties>
-                <compartment entity-id="13ebd6ae-3121-47aa-816f-62214a322a86">
-                    <lane hadOnlyOneElement="false" entity-id="647bef92-e04b-41a0-8f18-08d0e3f803ae">
-                        <pattern type="http://www.mulesoft.org/schema/mule/scripting/transformer" name="Create REJECTED PurchaseReceipt" entity-id="b50c4e58-f90a-408d-9dc3-384158a3f3ba">
+                <compartment entity-id="b1021080-701d-4ad7-b15f-c20c19eda0ba">
+                    <lane hadOnlyOneElement="false" entity-id="170376a7-3924-42c3-a53f-ebed04e73ad1">
+                        <pattern type="http://www.mulesoft.org/schema/mule/scripting/transformer" name="Create REJECTED PurchaseReceipt" entity-id="a6409a56-1d4a-4629-bf72-d6b3f6cfa548">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>
@@ -741,8 +741,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="1eee5607-2637-4aa7-bd40-663289773a7d">
-            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="Samsung Webservice Client" entity-id="c900a9be-71ca-4d57-8b0a-c5e8ee3b98f8">
+        <lane hadOnlyOneElement="false" entity-id="6ffe9c95-7e5a-40c0-8f2a-89b546cf3ba2">
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="Samsung Webservice Client" entity-id="f7c4a4c7-b191-4bc9-89bf-2e35e8cb54f0">
                 <properties>
                     <property name="configuration-ref"/>
                     <property value="http://www.mulesoft.org/schema/mule/cxf/jaxws-client" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
@@ -756,7 +756,7 @@
                     <property name="enableMuleSoapHeaders"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/samsung/orders" entity-id="6deea4ae-0d96-4060-8839-b366a287c462">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/samsung/orders" entity-id="1cd67b00-2394-471c-a030-c1630a55b849">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -795,8 +795,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="b9c5c9c5-82de-4f41-a4ee-c735bf2d9527">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/jms/endpoint" name="inhouseOrder" entity-id="5404ae61-a299-4ff5-bd62-020a4dab8f07">
+        <lane hadOnlyOneElement="false" entity-id="bad70bd4-8eca-4d64-8202-eccce46d3f44">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/jms/endpoint" name="inhouseOrder" entity-id="7c8f7477-0b59-4383-9db7-2cdf3fd11d9a">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property name="exchange-pattern"/>
@@ -820,21 +820,21 @@
                     </property-collection>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="Initialise Price" entity-id="2b59ba81-bc96-466a-b867-4156ea579581">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="Initialise Price" entity-id="c43f530f-5bfa-4171-bc90-ff7392f402ec">
                 <properties>
                     <property value="http://www.mulesoft.org/schema/mule/core/set-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
                     <property value="price" name="variableName"/>
                     <property value="0" name="value"/>
                 </properties>
             </pattern>
-            <scope type="http://www.mulesoft.org/schema/mule/core/enricher" name="Enrich with price" entity-id="28ebc633-5a2e-4fb7-a4c7-1e50da481198">
+            <scope type="http://www.mulesoft.org/schema/mule/core/enricher" name="Enrich with price" entity-id="e3f253fc-7aa8-4c05-82a9-9f3bdcde70ec">
                 <properties>
                     <property name="source"/>
                     <property value="#[price]" name="target"/>
                 </properties>
-                <compartment entity-id="188a5fa4-54a8-4d43-8e1e-c382369d8a6b">
-                    <lane hadOnlyOneElement="false" entity-id="12905210-04d4-4d99-8873-08eadb8ec567">
-                        <scope type="http://www.mulesoft.org/schema/mule/ee/core/cache" name="Cache the Price" entity-id="bc6930ee-ea68-415c-8a72-328c8f2565c7">
+                <compartment entity-id="bb4edc5c-9ad1-4d42-a997-f56a4a616082">
+                    <lane hadOnlyOneElement="false" entity-id="07550482-5af5-4995-ae32-abb9ee5b0c1f">
+                        <scope type="http://www.mulesoft.org/schema/mule/ee/core/cache" name="Cache the Price" entity-id="01c80d48-bbd9-48aa-9aba-2e47156b0472">
                             <properties>
 <property value="Caching_Strategy" name="cachingStrategy-ref"/>
 <property name="filterLabel"/>
@@ -844,9 +844,9 @@
 <property name="use_a_filter"/>
 <property name="filter-ref"/>
                             </properties>
-                            <compartment entity-id="f05dec9b-0c0b-46e8-8769-35d3e4107230">
-<lane hadOnlyOneElement="false" entity-id="2b576054-653e-43bb-91a0-1ffd6fd1717d">
-    <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Invoke Price Service" entity-id="efd20923-a78b-44a6-baf8-f6e75433821b">
+                            <compartment entity-id="05124932-374a-41f5-ac3c-fbb3dadcd788">
+<lane hadOnlyOneElement="false" entity-id="46968ee7-b67a-4e95-b1b3-c3ce5ca53a3e">
+    <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="Invoke Price Service" entity-id="fc0187ed-be96-4020-bec8-f31917126fa3">
         <properties>
             <property value="one-way" name="exchange-pattern"/>
             <property value="request-response" name="exchange-pattern"/>
@@ -874,7 +874,7 @@
             <property name="keep-alive"/>
         </properties>
     </endpoint>
-    <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="261eebeb-4b39-43bd-b83e-bb7cba37c571">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" name="Object to String" entity-id="d86beca1-32aa-432f-ae34-cb26c2ebacfb">
         <properties>
             <property name="returnClass"/>
             <property name="ignoreBadInput"/>
@@ -888,7 +888,7 @@
                     </lane>
                 </compartment>
             </scope>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Save Order Item" entity-id="d1ccf847-9731-4be8-bf1b-eb33a63933b6">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Save Order Item" entity-id="60e8cb5d-e91b-4fc5-9a17-7c259d7d971e">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="one-way" name="exchange-pattern"/>
@@ -916,21 +916,21 @@
                     </property-collection>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="totalPrice = price * payload.quantity" entity-id="02f2c22f-0836-4b0f-b984-eed4f5c9039e">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/variable-transformer" name="totalPrice = price * payload.quantity" entity-id="59e3d25f-7109-40a8-bd95-09a4dd940bfd">
                 <properties>
                     <property value="http://www.mulesoft.org/schema/mule/core/set-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
                     <property value="totalPrice" name="variableName"/>
                     <property value="#[price * payload.quantity]" name="value"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="totalValue += totalPrice" entity-id="bc3ddbbf-8664-4cba-9e4e-5f9135a30fed">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/session-variable-transformer" name="totalValue += totalPrice" entity-id="5c71ac56-d5cf-489e-988b-9701c8960898">
                 <properties>
                     <property value="http://www.mulesoft.org/schema/mule/core/set-session-variable" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
                     <property value="totalValue" name="variableName"/>
                     <property value="#[totalValue + totalPrice]" name="value"/>
                 </properties>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" name="Groovy" entity-id="94bebb73-abba-4d06-92cb-465c1f9d02f3">
+            <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyTransformer" name="Groovy" entity-id="08545fc9-588b-4976-a52e-4013631cf804">
                 <properties>
                     <property name="returnClass"/>
                     <property name="ignoreBadInput"/>
@@ -942,18 +942,18 @@
                     </property-collection>
                 </properties>
             </pattern>
-            <scope type="http://www.mulesoft.org/schema/mule/core/rollback-exception-strategy" name="Rollback Exception Strategy" entity-id="2f6991bf-3183-43b1-91d6-048d5d4daf2c">
+            <scope type="http://www.mulesoft.org/schema/mule/core/rollback-exception-strategy" name="Rollback Exception Strategy" entity-id="21d9e500-c0f2-492f-bbfc-ca1a58c94b3d">
                 <properties>
                     <property value="3" name="maxRedeliveryAttempts"/>
                     <property name="when"/>
                     <property name="enableNotifications"/>
                 </properties>
-                <compartment entity-id="cdd78ab8-f3d5-4ad0-ba1d-190391baf6c6">
-                    <lane hadOnlyOneElement="false" entity-id="056288cd-44b2-450e-bdb5-b24c8edaf2e9">
-                        <scope type="http://www.mulesoft.org/schema/mule/core/!" name="Default" entity-id="ed0c8941-6448-4fc6-af8f-e3d9dc2d9489">
-                            <compartment entity-id="b9793186-f44b-4129-9c86-03a1528993ef">
-<lane hadOnlyOneElement="false" entity-id="fb39c695-63b3-4d0c-846e-14e9d27157a9">
-    <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="ae3b00a8-584d-4a52-8b9b-244049d25bc8">
+                <compartment entity-id="87484974-7158-4d56-b47a-95bbe14cc374">
+                    <lane hadOnlyOneElement="false" entity-id="d266aee4-5dba-4eea-bfc6-9cd5d104213b">
+                        <scope type="http://www.mulesoft.org/schema/mule/core/!" name="Default" entity-id="ca587643-1255-4034-8f8b-d65d3797d237">
+                            <compartment entity-id="e4457a66-2cf3-4708-834d-bbe30296831d">
+<lane hadOnlyOneElement="false" entity-id="3911973c-4150-486e-a860-13b8cf065900">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Logger" entity-id="91b41061-66b8-4327-8561-d5b2bee589cb">
         <properties>
             <property value="#[payload:]" name="message"/>
             <property value="INFO" name="level"/>
@@ -963,10 +963,10 @@
 </lane>
                             </compartment>
                         </scope>
-                        <scope type="http://www.mulesoft.org/schema/mule/core/on-redelivery-attempts-exceeded" name="Redilivery exhausted" entity-id="cfde5359-2da7-4685-b2d3-c8f96788d343">
-                            <compartment entity-id="5c767edd-200e-429d-92aa-4ea082ef269d">
-<lane hadOnlyOneElement="false" entity-id="cad0e529-ae7f-49af-a125-6466add45980">
-    <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invoke defaultErrorHandler" entity-id="e5130dfe-ca63-46eb-95e7-4e50dde1da5c">
+                        <scope type="http://www.mulesoft.org/schema/mule/core/on-redelivery-attempts-exceeded" name="Redilivery exhausted" entity-id="21ac404d-f125-4aac-b8fe-40f8a5182669">
+                            <compartment entity-id="488a4653-c852-41de-b3eb-a183904f7698">
+<lane hadOnlyOneElement="false" entity-id="7602d429-788f-472d-8de7-c089b41a52a8">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invoke defaultErrorHandler" entity-id="88d6d79e-821e-4a60-b6ed-1fc192d1bf59">
         <properties>
             <property value="defaultErrorHandler" name="name"/>
         </properties>
@@ -988,8 +988,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="8a698fb1-b260-4d9b-86f6-f484143fd5bb">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="audit" entity-id="37a4f484-6a9b-4ae6-9ee0-2c34f8ae272f">
+        <lane hadOnlyOneElement="false" entity-id="e5b2a34f-a70b-429d-8253-d84869ca46d8">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/vm/endpoint" name="audit" entity-id="caded167-ff68-4377-98f9-81f3ab90e130">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="one-way" name="exchange-pattern"/>
@@ -1010,7 +1010,7 @@
                     </property-collection>
                 </properties>
             </endpoint>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Save OrderSummary" entity-id="bbe635d1-3466-499b-8f99-8d5a72de5b68">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/ee/jdbc/endpoint" name="Save OrderSummary" entity-id="7f0bc968-143f-4df8-9d0f-06dd36fdcddb">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="one-way" name="exchange-pattern"/>
@@ -1038,26 +1038,26 @@
                     </property-collection>
                 </properties>
             </endpoint>
-            <scope type="http://www.mulesoft.org/schema/mule/core/choice-exception-strategy" name="Choice Exception Strategy" entity-id="cfe0e262-8c9c-4b30-8eed-f4e420bd106b">
-                <compartment entity-id="dff209eb-bcb3-4f93-b613-a14706f2eaf3">
-                    <lane hadOnlyOneElement="false" entity-id="39a6fd1f-f96a-4e55-a8e5-09757c1deff6">
-                        <scope type="http://www.mulesoft.org/schema/mule/core/rollback-exception-strategy" name="Rollback Exception Strategy" entity-id="ce88c54d-5932-4950-b643-f98d50894da6">
+            <scope type="http://www.mulesoft.org/schema/mule/core/choice-exception-strategy" name="Choice Exception Strategy" entity-id="5fcc739f-cdf8-480f-9726-3256bde88a90">
+                <compartment entity-id="6d9532f8-639f-4a9f-b4fd-dcbcae9734fb">
+                    <lane hadOnlyOneElement="false" entity-id="83a0ecea-dd33-4683-bdb6-32770a3f5ace">
+                        <scope type="http://www.mulesoft.org/schema/mule/core/rollback-exception-strategy" name="Rollback Exception Strategy" entity-id="39e0cd29-98ca-4e09-bd30-9bea1a9195c3">
                             <properties>
 <property name="maxRedeliveryAttempts"/>
 <property value="#[sessionVars['totalValue'] &gt; 5000" name="when"/>
 <property name="enableNotifications"/>
                             </properties>
-                            <compartment entity-id="f0305163-013c-4b6d-89f4-3c35ef787364"/>
+                            <compartment entity-id="d66e9b23-c190-49f2-8d32-7475e77a1264"/>
                         </scope>
-                        <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="a7b1f205-862b-4b80-b36e-df9682e18554">
+                        <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="f4a42c0f-a6f8-4b9d-94d6-4d7a6a6239bd">
                             <properties>
 <property name=""/>
 <property name="when"/>
 <property name="enableNotifications"/>
                             </properties>
-                            <compartment entity-id="40b8b689-cef5-442c-b64a-a66282674cd1">
-<lane hadOnlyOneElement="false" entity-id="a680979a-a975-469a-ad31-ca3a8783d9cf">
-    <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invoke defaultErrorHandler" entity-id="e10a31c9-a732-47cb-849f-f0ec953f9790">
+                            <compartment entity-id="33001e9e-bf1e-4ce4-8169-f8f9f51b9ff6">
+<lane hadOnlyOneElement="false" entity-id="cc461fd1-0b43-4c6e-86a1-80ef077ca6ce">
+    <pattern type="http://www.mulesoft.org/schema/mule/core/flow-ref" name="Invoke defaultErrorHandler" entity-id="e16567f4-a00d-4d4f-b019-66dfced947ed">
         <properties>
             <property value="defaultErrorHandler" name="name"/>
         </properties>
@@ -1079,8 +1079,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="ad712e79-b70f-4620-aed2-7481ccc59671">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/prices" entity-id="52d4afa0-659d-47ab-a28c-b41ff4f0c490">
+        <lane hadOnlyOneElement="false" entity-id="9bbb2b5c-6359-4420-af17-b83ade35a58a">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/prices" entity-id="50965270-0f84-4334-aee6-fede89b425aa">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -1108,7 +1108,7 @@
                     <property name="keep-alive"/>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/jersey/resources" name="Price Service" entity-id="6a99fa35-28db-4d98-84ed-904b9cd0802f">
+            <pattern type="http://www.mulesoft.org/schema/mule/jersey/resources" name="Price Service" entity-id="d199677c-2052-4e59-ab8e-234c4c8f50cd">
                 <properties>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/core/component;0">
                         <property value="com.mulesoft.se.orders.ProductPrice" name="class"/>
@@ -1126,8 +1126,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="7b7a7202-f4a9-4f23-90ee-e1195322518a">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/samsung/orders" entity-id="37af500f-53ba-45e7-ba90-834705bc15fc">
+        <lane hadOnlyOneElement="false" entity-id="c8e0fa05-5a12-4b32-affc-dde934b44f1d">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="/samsung/orders" entity-id="0e3934e9-b9b9-45c6-b7e1-124766f848ad">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -1156,7 +1156,7 @@
                 </properties>
                 <description>Process HTTP reqests or responses.</description>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="Order WebService" entity-id="f30b65de-5759-46bc-968f-86531561fe40">
+            <pattern type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" name="Order WebService" entity-id="b68e2ccb-8b6b-4f1d-8898-8a5d4028cd95">
                 <properties>
                     <property name="configuration-ref"/>
                     <property value="http://www.mulesoft.org/schema/mule/cxf/jaxws-service" name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute"/>
@@ -1173,7 +1173,7 @@
                 </properties>
                 <description>Make a web service available via CXF</description>
             </pattern>
-            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="Samsung Service Impl" entity-id="a54ab9cf-8078-4704-a33f-37402a94c3be">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/component" name="Samsung Service Impl" entity-id="70a87cf2-f569-4f81-9596-89caa695261c">
                 <properties>
                     <property value="com.mulesoft.se.samsung.SamsungServiceImpl" name="class"/>
                 </properties>
@@ -1189,15 +1189,15 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="21fa6c52-72bd-4a37-9740-a9bf2f8e694b">
-            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Log Error" entity-id="dcb6ff3b-3a95-472e-93a7-44dc266291c6">
+        <lane hadOnlyOneElement="false" entity-id="3f6bfe91-516a-4291-941d-74c0b9fd4b59">
+            <pattern type="http://www.mulesoft.org/schema/mule/core/logger" name="Log Error" entity-id="b588ca88-c6cd-4e30-a529-c9bd06b862ef">
                 <properties>
                     <property value="Error occurred: #[payload]" name="message"/>
                     <property value="INFO" name="level"/>
                     <property name="category"/>
                 </properties>
             </pattern>
-            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/smtps/endpoint" name="Send Email to Operations" entity-id="41d0f60b-2395-4eac-9a46-f8f53e57b434">
+            <endpoint message-exchange-pattern="OneWay" direction="Outbound" type="http://www.mulesoft.org/schema/mule/smtps/endpoint" name="Send Email to Operations" entity-id="c1a8c1c8-0831-4a58-bff7-5a159b2d06f9">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="localhost" name="host"/>
@@ -1254,8 +1254,8 @@
             <property name="USE_TRANSACTION_ID"/>
             <property name="tracking:transaction-id"/>
         </properties>
-        <lane hadOnlyOneElement="false" entity-id="d918e3a0-048c-4a48-af8c-63cfed423a0c">
-            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="fdee80c1-2329-4928-b497-20bb174e6452">
+        <lane hadOnlyOneElement="false" entity-id="14e1354a-1437-4628-a9a6-fa9e6e3ea65d">
+            <endpoint message-exchange-pattern="OneWay" direction="Inbound" type="http://www.mulesoft.org/schema/mule/http/endpoint" name="HTTP" entity-id="566fcea5-6f7d-48d6-af4f-cc6747d80b94">
                 <properties>
                     <property value="one-way" name="exchange-pattern"/>
                     <property value="request-response" name="exchange-pattern"/>
@@ -1283,7 +1283,7 @@
                     <property name="keep-alive"/>
                 </properties>
             </endpoint>
-            <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="Create Tables" entity-id="fbdac4af-81ca-46d6-a500-287414881d36">
+            <pattern type="http://www.mulesoft.org/schema/mule/scripting/groovyComponent" name="Create Tables" entity-id="bdc9ae73-ebcd-4191-a2e6-f2f17a9c7078">
                 <properties>
                     <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
                         <property value="jdbcConnector = muleContext.getRegistry().lookupConnector(&quot;JDBCConnector&quot;);&#xA;qr = jdbcConnector.getQueryRunner();&#xA;conn = jdbcConnector.getConnection();&#xA;qr.update(conn, &quot;CREATE TABLE orders (i int generated always as identity, product_id varchar(256), name varchar(256), manufacturer varchar(256), quantity integer, price integer)&quot;);&#xA;qr.update(conn, &quot;CREATE TABLE order_audits (i int generated always as identity, order_id varchar(256), total_value integer)&quot;);&#xA;return &quot;db populated&quot;;" name="text"/>
@@ -1291,15 +1291,15 @@
                     </property-collection>
                 </properties>
             </pattern>
-            <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="d8549540-f0f1-4402-b8af-63ef0caf3208">
+            <scope type="http://www.mulesoft.org/schema/mule/core/catch-exception-strategy" name="Catch Exception Strategy" entity-id="d7d0ff3e-9ed4-47de-95b3-96ff5dbbcdb7">
                 <properties>
                     <property name=""/>
                     <property name="when"/>
                     <property name="enableNotifications"/>
                 </properties>
-                <compartment entity-id="a51584ba-c935-40df-9eab-02dc1a889bf2">
-                    <lane hadOnlyOneElement="false" entity-id="67979f04-084f-4a5a-9b2b-32d8e2a35d42">
-                        <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="'table already populated'" entity-id="62f84185-981e-4190-a2cf-073f5ba7f955">
+                <compartment entity-id="2d5020c0-9636-41cd-80cc-1303258d0288">
+                    <lane hadOnlyOneElement="false" entity-id="23348657-d194-49f7-8c32-9db91f18282f">
+                        <pattern type="http://www.mulesoft.org/schema/mule/core/expression-transformer" name="'table already populated'" entity-id="7714774c-d4ce-44ea-9d4a-776d3b73f9ac">
                             <properties>
 <property name="returnClass"/>
 <property name="ignoreBadInput"/>

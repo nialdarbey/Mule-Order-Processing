@@ -1,125 +1,172 @@
 <html>
 <head>
-<link href="css/south-street/jquery-ui-1.8.20.custom.css"
-	rel="stylesheet" type="text/css" />
 <link href="css/estore.css" rel="stylesheet" type="text/css" />
+<link type="text/css"
+	href="css/south-street/jquery-ui-1.8.20.custom.css" rel="stylesheet" />
 <link href="css/shCore.css" rel="stylesheet" type="text/css" />
 <link href="css/shThemeDefault.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="js/jquery-ui-1.8.20.custom.min.js"></script>
 <script type="text/javascript" src="mule-resource/js/mule.js"></script>
-<script type="text/javascript" src="js/shCore.js"></script>
-<script type="text/javascript" src="js/shBrushXml.js"></script>
+<script type="text/javascript" src="scripts/shCore.js"></script>
+<script type="text/javascript" src="scripts/shBrushXml.js"></script>
+
 <script type="text/javascript">
-	$(function() {
-		/*$.ajax({
-			url : "http://localhost:8091/populate"
-		});*/
-		mule.rpc("/orders/manufacturers", "", manufacturersResponse);
-		tabs = $("#tabs").tabs({
-			selected : 0
-		});
-		$('.button').button();
-
-		$('#addItemButton')
-				.click(
-						function() {
-							$('#orderItemTable tbody')
-									.append(
-											'<tr><td class="manufacturer">'
-													+ '</td><td class="name">'
-													+ $("#productName").val()
-													+ '</td><td class="productId">'
-													+ $("#productId").val()
-													+ '</td><td class="quantity">'
-													+ $("#quantity").val()
-													+ '</td><td><a class="deleteButton" style="background-color: red; color:white; padding: 2px 5px;">Delete</a></tr>');
-							$('.deleteButton').click(function() {
-								$(this).parent('td').parent('tr').remove();
-							});
-							$('#newItem input').val('');
+	$(document)
+			.ready(
+					function() {
+						function isNumber(n) {
+							return !isNaN(parseFloat(n)) && isFinite(n);
+						}
+						
+						/*$.ajax({
+							url : "http://localhost:8091/populate"
+						});*/
+						
+						tabs = $("#tabs").tabs({
+							selected : 0
 						});
-		$('#submitButton').click(function() {
-			$('#orderSummaryTable tbody tr').remove();
-			var order = {
-				orderId : $('#orderId').val(),
-				customer : {
-					firstName : $('#firstName').val(),
-					lastName : $('#lastName').val(),
-					address : $('#address').val()
-				},
-				orderItems : []
-			}
-			$('#orderItemTable tbody tr').each(function() {
-				var manufacturer = $('td.manufacturer', this)[0].innerHTML;
-				var name = $('td.name', this)[0].innerHTML;
-				var productId = $('td.productId', this)[0].innerHTML;
-				var quantity = $('td.quantity', this)[0].innerHTML;
-				order.orderItems.push({
-					"item" : {
-						"manufacturer" : manufacturer,
-						"name" : name,
-						"productId" : productId,
-						"quantity" : quantity
-					}
-				})
+						$('.button').button();
 
-			})
-			var request = JSON.stringify(order);
-			mule.rpc("/orders/request", request, orderResponse);
-		});
-		$('#resetButton').click(function() {
-			$('#main input').val('');
-			$('#orderItemTable tbody tr').remove();
-		});
-		function manufacturersResponse(message, error) {
-			if (error == null) {
-				alert(message.data);
-			} else {
-				alert(error.data);
-			}
-		}
-		function orderResponse(message, error) {
-			if (error == null) {
-				orderSummary = JSON.parse(message.data);
-				for (i = 0; i < orderSummary.orderItems.length; i++) {
-					var item = orderSummary.orderItems[i].item;
-					$('#orderSummaryTable tbody').append(
-							'<tr><td>' + item.name + '</td><td>'
-									+ item.productId + '</td><td>'
-									+ item.quantity + '</td><td>'
-									+ item.purchaseReceipt.id + '</td><td>'
-									+ item.purchaseReceipt.status + '</td><td>'
-									+ item.purchaseReceipt.totalPrice
-									+ '</td></tr>');
-				}
-				tabs.tabs('enable', 1);
-				tabs.tabs('select', 1);
-			} else {
-				alert(error.data);
-			}
-		}
-		$("#soapSubmitButton").click(
-				function() {
-					mule.rpc('/orders/soap', $("#soapRequest").val(), function(data) {
-						$('#soapResponse').val(data.data);
-						//SyntaxHighlighter.all();
+						$('#addItemButton')
+								.click(
+										function() {
+											if ( ! isNumber($('#quantity').val())) {
+												alert("Invalid quantity");
+												$('#quantity').focus();
+											} else {
+												$('#orderItemTable tbody')
+														.append(
+																'<tr><td class="manufacturer">'
+																		+ $('#manufacturer').val()
+																		+ '</td><td class="name">'
+																		+ $(
+																				"#productName")
+																				.val()
+																		+ '</td><td class="productId">'
+																		+ $(
+																				"#productId")
+																				.val()
+																		+ '</td><td class="quantity">'
+																		+ $(
+																				"#quantity")
+																				.val()
+																		+ '</td><td><a class="deleteButton" style="background-color: red; color:white; padding: 2px 5px;">Delete</a></tr>');
+												$('.deleteButton').click(
+														function() {
+															$(this).parent('td')
+																	.parent('tr')
+																	.remove();
+														});
+												$('#newItem input').val('');
+											}
+										});
+						$('#submitButton')
+								.click(
+										function() {
+											$('#orderSummaryTable tbody tr')
+													.remove();
+											var order = {
+												orderId : $('#orderId').val(),
+												customer : {
+													firstName : $('#firstName')
+															.val(),
+													lastName : $('#lastName')
+															.val(),
+													address : $('#address')
+															.val()
+												},
+												orderItems : []
+											}
+											$('#orderItemTable tbody tr')
+													.each(
+															function() {
+																var manufacturer = $(
+																		'td.manufacturer',
+																		this)[0].innerHTML;
+																var name = $(
+																		'td.name',
+																		this)[0].innerHTML;
+																var productId = $(
+																		'td.productId',
+																		this)[0].innerHTML;
+																var quantity = $(
+																		'td.quantity',
+																		this)[0].innerHTML;
+																order.orderItems
+																		.push({
+																			"item" : {
+																				"manufacturer" : manufacturer,
+																				"name" : name,
+																				"productId" : productId,
+																				"quantity" : quantity
+																			}
+																		})
+
+															})
+											var request = JSON.stringify(order);
+											mule.rpc("/orders/request",
+													request, orderResponse);
+										});
+						$('#resetButton').click(function() {
+							$('#main input').val('');
+							$('#orderItemTable tbody tr').remove();
+						});
+						function manufacturersResponse(message, error) {
+							if (error == null) {
+								alert(message.data);
+							} else {
+								alert(error.data);
+							}
+						}
+						function orderResponse(message, error) {
+							if (error == null) {
+								orderSummary = JSON.parse(message.data);
+								for (i = 0; i < orderSummary.orderItems.length; i++) {
+									var item = orderSummary.orderItems[i].item;
+									$('#orderSummaryTable tbody')
+											.append(
+													'<tr><td>'
+															+ item.name
+															+ '</td><td>'
+															+ item.productId
+															+ '</td><td style="text-align: right;">'
+															+ item.quantity
+															+ '</td><td>'
+															+ item.purchaseReceipt.status
+															+ '</td><td style="text-align: right;">'
+															+ item.purchaseReceipt.totalPrice
+															+ '</td></tr>');
+								}
+								tabs.tabs('enable', 1);
+								tabs.tabs('select', 1);
+							} else {
+								alert(error.data);
+							}
+						}
+						$("#soapSubmitButton").click(
+								function() {
+									mule.rpc('/orders/soap', $("#soapRequest")
+											.val(), function(data) {
+										$('#soapResponse').val(data.data);
+									});
+								});
+						$("#manufacturers").click(function() {
+							mule.rpc("/orders/manufacturers", "",
+									manufacturersResponse);
+						});
+
 					});
-				});
-
-	});
 </script>
 </head>
 <body>
-
 <h1>Mule Order Processing</h1>
 <div id="tabs">
 <ul>
 	<li><a href="#form"><span>Form</span></a></li>
 	<li><a href="#confirmation"><span>Confirmation</span></a></li>
 	<li><a href="#soap"><span>Soap</span></a></li>
-	<li><a href="#documentation"><span>Documentation</span></a></li>
 </ul>
 <div id="form">
 <div id="summary" style="float: right; width: 50%; padding: 1em;">
@@ -168,7 +215,11 @@
 <table>
 	<tr>
 		<td class="title">Manufacturer:</td>
-		<td class="field"><select id="manufacturerSelect" /></td>
+		<td class="field"><select id="manufacturer">
+			<option value="Samsung">Samsung</option>
+			<option value="Philips">Philips</option>
+			<option value="Sony">Sony</option>
+		</select></td>
 	</tr>
 	<tr>
 		<td class="title">Name:</td>
@@ -197,10 +248,9 @@
 		<tr>
 			<th>Name</th>
 			<th>Product Id</th>
-			<th>Quantity</th>
-			<th>Receipt Id</th>
+			<th style="text-align: right;">Quantity</th>
 			<th>Status</th>
-			<th>Price</th>
+			<th style="text-align: right;">Price</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -208,8 +258,15 @@
 	</tbody>
 </table>
 </div>
-<div id="soap"><textarea id="soapRequest"
-	style="display: inline; width: 50%;">
+<div id="soap">
+<div id="response" style="float: right; width: 50%;">
+<h2>Response</h2>
+<textarea id="soapResponse" style="width: 100%; height: 300px;" >
+</textarea>
+</div>
+<div id="request" style="width: 50%;">
+<h2>Request</h2>
+<textarea id="soapRequest" style="width: 100%; height: 300px;">
 <soapenv:Envelope
 	xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
 	xmlns:ord="http://orders.se.mulesoft.com/">
@@ -254,352 +311,9 @@
    </soapenv:Body>
 </soapenv:Envelope>
 </textarea> 
-<textarea id="soapResponse" style="display: inline; width: 50%;" ></textarea>
-<a id="soapSubmitButton" class="button">Submit &gt;&gt;</a></div>
-<div id="documentation">
-<h1 dir="ltr">Introduction</h1>
-<p dir="ltr">With this document we wish to introduce you to some
-powerful new features in Mule 3.3</p>
-
-<ul>
-	<li>
-	<p dir="ltr">Improved Error Handling: New exception strategy
-	patterns fully integrated in Studio. Included are Try/Catch, Rollback
-	processing, conditional processing in Choice routers based on exception
-	type, or just about any criteria!</p>
-	</li>
-	<li>
-	<p dir="ltr">Iterative Processing using Foreach Scope: Allows for
-	iterative loop type processing while maintaining the original message
-	context</p>
-	</li>
-	<li>
-	<p dir="ltr">Mule Expression Language: A new, unified expression
-	language to improve consistency and ease of use when validating,
-	filtering, routing, or transforming messages</p>
-	</li>
-	<li>
-	<p dir="ltr">Cache: Improve performance with “In memory” caching of
-	messages, such as the results of service calls</p>
-	</li>
-	<li>
-	<p dir="ltr">Graphical Data Mapper: A new graphical tool to easily
-	transform from one data format to another data format while also
-	mapping specific fields within the message structure. Formats supported
-	include XML, JSON, CSV, POJOs, collections of POJOs, and EXCEL</p>
-	</li>
-</ul>
-<strong></strong><strong> </strong>
-<p dir="ltr">We will do so by walking you through the development of
-a Mule Application which exploits each of these new features. As we work
-our way through the development process we will describe what we want to
-achieve and explain how to achieve that in Mule Studio. For the sake of
-simplicity we will refer you to our online documentation when we touch
-on features already available in previous releases.</p>
-
-<h1 dir="ltr">Use Case</h1>
-<p dir="ltr">As part of the integration plaform of Stallion
-Electronics, we wish to develop an Order Processing SOAP based
-Webservice. The service should accept Order requests and process each
-item requested inside the order. If a requested item is manufactured by
-Samsung, then that particular item request should be routed to an
-external SOAP based Webservice hosted by Samsung. Stallion Electronics
-should handle all other item requests. Regardless, the result of each
-item request should be stored (success / failure) together with the
-price. For non-Samsung requests, the price of the product should be
-retrieved from an inhouse RESTful webservice. To reduce calls to this
-service and make the Order processing more efficient, the results of
-these calls should be cached for a period of time. Finally the results
-of the Item requests should be amalgamated into a summary reply to be
-sent back to the client. Before replying, the summary should be audited.
-The audit of these summaries must be guaranteed in the case of orders
-with a total value greater than 5000 dollars. Failed invocations of
-Samsung’s webservice need not be retried, rather the status of the
-purcaseReceipt should be set to REJECTED.</p>
-
-<h1 dir="ltr">The Flows</h1>
-<p dir="ltr">We expose the Order Processing webservice on the
-orderService flow. This delegates processing to the other flows and
-sub-flows.</p>
-
-<h2 dir="ltr">orderService</h2>
-<h3 dir="ltr">Explanation</h3>
-<strong></strong><strong>Orders arrive over HTTP. We
-immediately dispatch each item to the corresponding Order Item
-processing service. Once all these Item requests have been processed,
-the summary of the Order is audited before returning to the client.
-Exceptions are caught and processed by the defaultErrorHandler sub-flow.<img
-	src="https://lh5.googleusercontent.com/pjWUZPvnaL4uLOJNaOdfu3aaHL5RcL2VOz4TJKEeJMsk35PMbR-8i3hH9tya9hIsfDflqPKPtBZjBJVZ0gvQvgW84pd2MmG93OCYEq2Kz_D6dxlnoA4"
-	alt="" width="787px;" height="418px;" /> </strong>
-<h3 dir="ltr">Expression Language</h3>
-<strong></strong><strong>Our first task is to initialise our
-totalValue variable to cater for our auditing requirements. This should
-be in Session scope as we’ll need to access it in other flows. </strong>
-<div dir="ltr">
-<table>
-	<colgroup>
-		<col width="*" />
-		<col width="*" />
-	</colgroup>
-	<tbody>
-		<tr>
-			<td><img
-				src="https://lh4.googleusercontent.com/830ctcc_0E_4wbFxejH5cT-qfIaWlkFzAWZKoy9ULjqZiBVlu_ThBahBNAOLgqhRIs9you2v989eiivdOfZIIEF0KcR5-nqm2-17QlEPFTxccdzzgAQ"
-				alt="" width="284px;" height="53px;" />*</td>
-			<td>We now have a new Building Block at our disposal, the
-			Session Variable Transformer. Use this both to set and remove
-			variables of Session scope.</td>
-		</tr>
-	</tbody>
-</table>
+<a id="soapSubmitButton" class="button">Submit &gt;&gt;</a>
 </div>
-&nbsp; Both the name of the variable and the value can be set using the
-same expression language. In other words, we can decide the name of the
-variable and its value at runtime! <img
-	src="https://lh3.googleusercontent.com/SYQg0z1_HkYnnbe7rxVYegOa1xvvJeUgvNN9eVTqsBM7ezAvBZltDTmd7hO_VjE6FBW-g80_HT33J8WIjyJ5omLrGVR_bqm6DkxEdRUmR12LdoTp7QQ"
-	alt="" width="617px;" height="227px;" /> Note the literal / expression
-drop-down for both Name and Value!
-<h3 dir="ltr">For Each</h3>
-<strong></strong><strong>Next up, we need to iterate over all
-of the items in the Order.</strong>
-<div dir="ltr">
-<table>
-	<colgroup>
-		<col width="271" />
-		<col width="389" />
-	</colgroup>
-	<tbody>
-		<tr>
-			<td>To achieve this we can use the Foreach scope. Any processing
-			needed on a particular Item should be inside the scope. The scope
-			splits the message up into separate messages for each item on the
-			specified collection.</td>
-			<td><img
-				src="https://lh4.googleusercontent.com/V1X_s1HrQ6w2M9Uc7m4Iu0rsLCJGgMRuDbNhl18U8S-raUmr2Ij1M7EB06g234yZJaVcXgIFRMqOG7lyvC_pdE0TxQjFZRuzCb1kRfGCgmNn_4nSAn8"
-				alt="" width="368px;" height="252px;" />*</td>
-		</tr>
-	</tbody>
-</table>
 </div>
-<strong></strong><strong> </strong>
-<div dir="ltr">
-<table>
-	<colgroup>
-		<col width="*" />
-		<col width="*" />
-	</colgroup>
-	<tbody>
-		<tr>
-			<td><img
-				src="https://lh4.googleusercontent.com/nqSoI85C7AIIZOtuBq4v_GgEzgH57YYcXpBrlAg3_nl4yrAgxyFfzqvT6uQaugiCVERIKl0Xjw0YU722bs7-qJtVgnmhbIoKM2k4sr3kZnMKSMSVxAM"
-				alt="" width="289px;" height="180px;" />*</td>
-			<td>Note how we specify #[payload.items] as our collection. We
-			will talk about the counter variable and the Root message variable
-			name in a minute. Very importantly, take note of the Batch Size. This
-			should be 1 if you want each item to be an instance of the OrderItem.
-			Anything greater would return an ArrayList instance.</td>
-		</tr>
-	</tbody>
-</table>
 </div>
-<strong></strong><strong> </strong>
-<h3 dir="ltr">Exception Strategy</h3>
-<strong></strong><strong>This flow is not transactional so we
-are only interested in logging errors, perhaps informing Operations
-also, so for this common scenario we have the defaultErrorHandler
-sub-flow. To delegate processing to defaultErrorHandler, let´s just drag
-a CatchExceptionStrategy to orderService. These Exception Strategies are
-sub-flows in their own right, so we can do just about anything in there.
-We can just drag the flow-ref into it. No more configuration needed
-here. </strong>
-<h2 dir="ltr">samsungOrder</h2>
-<h3 dir="ltr">Explanation</h3>
-<strong></strong><strong>The expression used in our Choice
-Message Routing Processor above is #[payload.manufacturer == ‘Samsung’].
-See how we have direct access to payload. It’s one of a number of
-context variables our Expression Language exposes to us. Bearing in mind
-that our original Order message has been split into the item messages
-inside it, payload now refers to the Item pertaining to the current
-iteration. Hence we arrive in some cases here at samsungOrder: Items
-arrive on our Inbound VM endpoint, which we need to transform into
-OrderRequests for the invocation of Samsung’s webservice. We invoke the
-service and filter only those responses that have HTTP status 200. We
-proceed to increment our totalValue variable before transforming the
-response from Samsung into a PurchaseReceipt instance representing the
-status (success / failure) of that request together with the total
-price.<img
-	src="https://lh3.googleusercontent.com/3GtGTbX-87oFNQYtgVBjT4BfqRZq6PG0ySavdlzAHfwUaqJhQeAzx8TcFNjQO62cH230KGoMA4IxEetE2Lx75O2ts2m28TaqJklVoSwl9efah6sq5x0"
-	alt="" width="791px;" height="228px;" /> </strong>
-<h3 dir="ltr">Graphical Data Mapper</h3>
-<strong></strong><strong>Transformations are extremely common
-to integration solutions. Mule has long provided you with a large array
-of transformers of both data-type and content. The latter can be pretty
-expensive exercises when payloads are large or computations are needed
-to produce the desired value. Now with Studio, we have a simple but very
-powerful graphical mapping tool which both speeds up the initial
-transformation effort and acts as a marvellous documentation artifact
-for the same. At a glance you can see exactly what has been defined.
-Here we need to transform our OrderItem instance into an OrderRequest as
-expected by Samsung’s webservice. <img
-	src="https://lh5.googleusercontent.com/CtQjr0_O5Qej0mK89Tlf8UIy6vg9NWXAEAymzSo3nofWyhCrQiEmQEqKFHLgyJTgEFcpRZREwpVEHQe04Uqslhl43uAkB909CwjJih8g8mKv6_3COwg"
-	alt="" width="661px;" height="243px;" /> Note how we have each field
-mapped to its target through the curved arrows. Targets and arrows are
-highlighted as you click on them for even easier viewing. We also need
-to transform the result returned by Samsung´s webservice into our own
-PurchaseReceipt:<img
-	src="https://lh3.googleusercontent.com/YX1GREFihiCBePG5LBr9CbKercC9hKPq7bNpWMqh0alI2bko0xs6yUo_2j_DzGhC7WNsp85NZwkmOZeDu6DOwLgY9dmPyfgi6vO8HoxJBVfdLPgZLsw"
-	alt="" width="650px;" height="255px;" /> </strong>
-<h3 dir="ltr">Exception Handling</h3>
-<strong></strong><strong>As agreed, failed invocations of
-Samsung’s Order processing webservice should not be retried. Instead a
-REJECTED PurchaseReceipt shoud be instantiated. As above we use a Catch
-Exception Strategy and place a script component inside it. </strong>
-<h3 dir="ltr">Expression Language</h3>
-<strong></strong><strong>We need to increment the totalValue
-Session variable:<img
-	src="https://lh6.googleusercontent.com/6lXmJBLPzNuhjg5A1Xl5pBmO7oAbsl_URYPYOoKNbYRK3S1Zq87l4_v2mlxnhToCLz2AYkFjCYAVxTZT-_zL2zfoGc7MBWmRZCueN1afkXuvVm7vk0Q"
-	alt="" width="603px;" height="222px;" /> The instantiation needed in
-the Exception Strategy is easy with our new Expression Language:</strong>
-<div dir="ltr">
-<table>
-	<colgroup>
-		<col width="402" />
-		<col width="258" />
-	</colgroup>
-	<tbody>
-		<tr>
-			<td><img
-				src="https://lh6.googleusercontent.com/r2rGjgdPeFzq3zwzKNOyB13wWCCD0xgZeqSfqNR1oSpLGnf-oVUcDqYGRSBN212OM2aawq8NA_HemYeY1J8Uq4hUHkqqzqN5h6kYA3XoWyKj7F5y3kE"
-				alt="" width="417px;" height="57px;" />*</td>
-			<td>Things to note here: this is not Groovy so no def for
-			variable declaration! with statement allows for group setter
-			invocation (separated by commas) Semi-colon at the end of each line
-			and finally assignment to payload.</td>
-		</tr>
-	</tbody>
-</table>
-</div>
-<strong></strong><strong> </strong>
-<h2 dir="ltr">inhouseOrder</h2>
-<h3 dir="ltr">Explanation</h3>
-<strong></strong><strong>All items that are not requests for
-Samsung products arrive here. This flow differs from the samsungOrder in
-that it is transactional: nothing is saved to the database until we have
-successfully created our PurchaseReceipt at the end. As soon as the
-message arrives, we invoke the Price Service to retrieve the price of
-the requested product. If the product ID is in the cache it is
-sufficient to use the cache value, otherwise the webservice should be
-invoked and the price stored in the cache. We subsequently increment the
-totalValue by that price (times the quantity requested). Save order to
-database and then create the PurchaseReceipt.</strong> &nbsp;
-<h3 dir="ltr">Cache</h3>
-<strong></strong><strong>An extremely beneficial new scope has
-been added to our toolbox: whole service invocation results can be
-stored for a given time. In plain English: cache the price of a
-particular product.</strong>
-<div dir="ltr">
-<table>
-	<colgroup>
-		<col width="431" />
-		<col width="229" />
-	</colgroup>
-	<tbody>
-		<tr>
-			<td><img
-				src="https://lh3.googleusercontent.com/G-RiClvs3KELE0HJYw-efzNQ-1sNFp13wL-j0kkYMiMz_Y9cDMiEvEaga3fqm2fLCNtszbJ0Eej-xGDbgK8zcSUSLWE-pIkW87VlZUswDwM_4P6preE"
-				alt="" width="414px;" height="145px;" />*</td>
-			<td>Every cache needs a Caching Strategy. This basically decides
-			how to store the value (in this case we use a memory store) and how
-			to generate the key (we use an expression).</td>
-		</tr>
-	</tbody>
-</table>
-</div>
-<strong></strong><strong> </strong>
-<div dir="ltr">
-<table>
-	<colgroup>
-		<col width="248" />
-		<col width="412" />
-	</colgroup>
-	<tbody>
-		<tr>
-			<td>These values are keyed by any expression. In this case we
-			use the payload.productId (remember the payload is an OrderItem after
-			the Foreach above!).</td>
-			<td><img
-				src="https://lh4.googleusercontent.com/vTCLdWiULOD2pj-zojalAsseQspzEimBnarl3Zj_hgIjolLJXGlWPpZ9IPmbTI4wEWdGTX3OXxTCT4Uk3g3Pl4YJMZ8IfbtVx9uZHmO5CyphDiioYhs"
-				alt="" width="410px;" height="249px;" />*</td>
-		</tr>
-	</tbody>
-</table>
-</div>
-<strong></strong><strong> </strong>
-<div dir="ltr">
-<table>
-	<colgroup>
-		<col width="421" />
-		<col width="239" />
-	</colgroup>
-	<tbody>
-		<tr>
-			<td><img
-				src="https://lh5.googleusercontent.com/H9GJMIiSVDd29EaHyJY-yFj-DMEnEQwSrFcPenPToejuRnAFmj9n4C9CdyuKMFC5NZDtX6RkPfsRKe5n_08N0fSulhOJXhHivsEPBo_3MepVx3Ai58k"
-				alt="" width="409px;" height="236px;" />*</td>
-			<td>So, with the store and the stategy setup, we can now create
-			our Cache and refer to the Strategy.</td>
-		</tr>
-	</tbody>
-</table>
-</div>
-&nbsp; &nbsp;
-<h3 dir="ltr">Error Handling</h3>
-<strong></strong><strong>Now we have a different ball game:
-this flow needs to have its transactions considered--it’s all or
-nothing! For that we have the Rollback Exception Strategy. The message
-will remain on the VM inbound endpoint until we have completed the whole
-flow. One point to note here. The processing strategy of the flow must
-be set to Synchronous, otherwise the application will fail. This is
-because reliable transports do not consume messages, they wait for
-messages to successfully complete a flow before consuming it; therefore,
-the flow must process synchronously. </strong>
-<h2 dir="ltr">auditService</h2>
-<h3 dir="ltr">Explanation</h3>
-<strong></strong><strong>Our auditService is the last point on
-our flow. All Order Items have been processed and the results stored in
-the same payload that arrived from the client. We just need to audit
-these results. However, this is only a strict requirement when the total
-value of the order is greater than 500 dollars. So our strategy is to
-attempt always to audit and only retry for such values. </strong>
-<h3 dir="ltr">Exception Handling</h3>
-<strong></strong><strong>The Choice Exception Strategy can nest
-any number of Exception Strategies. Each of these has a ‘when’ field
-which we can use to direct the wrapping Choice strategy. <img
-	src="https://lh3.googleusercontent.com/CZvLKMt_v5Dp0MOkyWLP9WB062-lp8ZR51njBloc280XrW0jfXq3JAgkGOZLIEI5vCaRLR6Md9VOYwE0bHSTtEFUbZu1UsP9PPf_2mKbETY1JAMQFBA"
-	alt="" width="611px;" height="203px;" /> In this case we just specify
-the criteria which the wrapping Choice Exception Strategy will use to
-determine which Strategy to delegate the processing. For all other cases
-(just leave when blank) we can use our familiar Catch Strategy. Note how
-we specify max redelivery attempts as 3 times. </strong>
-<h2 dir="ltr">priceService</h2>
-<h3 dir="ltr">Explanation</h3>
-<strong></strong><strong>The priceService is a simple RESTful
-webservice flow which returns the price of a product. It is blissfully
-unaware that its results are being cached by our Cache scope above. <img
-	src="https://lh6.googleusercontent.com/--TXFOmkpuIWMu3mfEvC3q6yOQ00hPrnTj2Y5id2yF36abU8JrLIp01ivIgemYhXG5FrlohrJi4kTIhFwvE_6y9VMmwxbR6lId9A467cKYPkEeR4cBE"
-	alt="" width="233px;" height="231px;" /> </strong>
-<h2 dir="ltr">defaultErrorHandler</h2>
-<h3 dir="ltr">Explanation</h3>
-<strong></strong><strong>Invoked by our Catch Exception
-Strategies, we simply log the error and let Operations know that trouble
-is brewing. <img
-	src="https://lh6.googleusercontent.com/DqAM6BCShl6tR8jboHytIVyTaYyoYII41X-85BkQ3HGyP14Tk5rg4ORpdr46cAVVKUnQ9DRGpaaldZnJzV_0AP34xbFC3s7BeQEmDqXOkg6cgd2KmR4"
-	alt="" width="299px;" height="102px;" /> </strong>
-<h1 dir="ltr">That's it!</h1>
-<strong id="internal-source-marker_0.6427970153745264">We hope
-you’ve enjoyed these valuable additions to an already rich integration
-platform!</strong>	</div>
-</div>
-
 </body>
 </html>

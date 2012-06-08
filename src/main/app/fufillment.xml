@@ -65,10 +65,10 @@ http://www.mulesoft.org/schema/mule/jbossts http://www.mulesoft.org/schema/mule/
         <object-to-string-transformer doc:name="Object to String"/>
         <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="SoapEnvelopeToBodyChild.xslt" doc:name="Xml to Soap Envelope"/>
         <object-to-string-transformer doc:name="Object to String"/>
+        <logger message="Before Transformation: #[payload:]" level="ERROR" doc:name="Logger"/>
         <data-mapper:transform config-ref="orderSummaryToJson" doc:name="Data-mapper"/>
-        <logger message="HERE IS THE TRANSFORMED XML #[payload:]" level="ERROR" doc:name="Logger"/>
         <object-to-string-transformer doc:name="Object to String"/>
-        <logger message="Herere she is….. #[payload:]" level="ERROR" doc:name="Logger"/>
+        <logger message="Result of transformation….. #[payload:]" level="ERROR" doc:name="Logger"/>
     </flow>
     <flow name="orderProxy" doc:name="orderProxy">
         <ajax:inbound-endpoint channel="/orders/soap" responseTimeout="10000" doc:name="/orders/soap"/>
@@ -149,7 +149,7 @@ return receipt;]]></scripting:text>
         </scripting:transformer>
         <rollback-exception-strategy maxRedeliveryAttempts="3" doc:name="Rollback Exception Strategy">
             <logger message="#[payload:]" level="INFO" doc:name="Logger"/>
-            <on-redelivery-attempts-exceeded doc:name="Redilivery exhausted">
+            <on-redelivery-attempts-exceeded >
                 <flow-ref name="defaultErrorHandler" doc:name="Invoke defaultErrorHandler"/>
             </on-redelivery-attempts-exceeded>
         </rollback-exception-strategy>
