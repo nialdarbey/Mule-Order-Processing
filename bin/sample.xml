@@ -1,0 +1,34 @@
+<order>
+	<orderId>12</orderId>
+	<customer>
+		<address>x</address>
+		<firstName>x</firstName>
+		<lastName>?</lastName>
+	</customer>
+	<orderItems>
+		<item>
+			<manufacturer>Samsung</manufacturer>
+			<name>s-1</name>
+			<productId>33333</productId>
+			<quantity>40</quantity>
+		</item>
+		<item>
+			<manufacturer>Philips</manufacturer>
+			<name>i-2</name>
+			<productId>1234</productId>
+			<quantity>4</quantity>
+		</item>
+		<item>
+			<manufacturer>Philips</manufacturer>
+			<name>s-3</name>
+			<productId>3</productId>
+			<quantity>4</quantity>
+		</item>
+		<item>
+			<manufacturer>Philips</manufacturer>
+			<name>i-4</name>
+			<productId>4</productId>
+			<quantity>4</quantity>
+		</item>
+	</orderItems>
+</order>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Graph author="nialdarbey" created="Tue Jun 05 17:31:39 GMT-03:00 2012" guiVersion="3.3.0.M2" id="1338990051314" licenseCode="Unlicensed" licenseType="Unknown" modified="Tue Jun 05 17:31:39 GMT-03:00 2012" modifiedBy="nialdarbey" name="orderSummary to Json" revision="1.0" showComponentDetails="false">
+<Global>
+<Metadata __sourcePath="{=}/order" _dataStructure="OBJECT" _id="__id" _type="Input" id="Metadata0">
+<Record fieldDelimiter="|" name="orderType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{=}/order/orderId" containerType="" label="orderId" name="orderId" type="string"/>
+<Field __sourcePath="{=}/order/customer/address" containerType="" label="address" name="address" type="string"/>
+<Field __sourcePath="{=}/order/customer/firstName" containerType="" label="firstName" name="firstName" type="string"/>
+<Field __sourcePath="{=}/order/customer/lastName" containerType="" label="lastName" name="lastName" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{=}/order/orderItems/item" _dataStructure="OBJECT" _id="__id" _metadataParentId="Metadata0" _parent_id="__parent_id" _position="0" _type="Input" id="Metadata1">
+<Record fieldDelimiter="|" name="itemType" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{=}/order/orderItems/item/manufacturer" containerType="" label="manufacturer" name="manufacturer" type="string"/>
+<Field __sourcePath="{=}/order/orderItems/item/name" containerType="" label="name" name="name" type="string"/>
+<Field __sourcePath="{=}/order/orderItems/item/productId" containerType="" label="productId" name="productId" type="string"/>
+<Field __sourcePath="{=}/order/orderItems/item/quantity" containerType="" label="quantity" name="quantity" type="integer"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object" _dataStructure="OBJECT" _id="__id" _type="Output" id="Metadata2">
+<Record fieldDelimiter="|" name="object" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __sourcePath="{}/object/orderId" containerType="" label="orderId" name="orderId" type="string"/>
+<Field __sourcePath="{}/object/customer/firstName" containerType="" label="firstName" name="firstName" type="string"/>
+<Field __sourcePath="{}/object/customer/lastName" containerType="" label="lastName" name="lastName" type="string"/>
+<Field __sourcePath="{}/object/customer/address" containerType="" label="address" name="address" type="string"/>
+</Record>
+</Metadata>
+<Metadata __sourcePath="{}/object/orderItems" _dataStructure="SINGLE_DIMENSIONAL_COLLECTION" _id="__id" _metadataParentId="Metadata2" _parent_id="__parent_id" _position="0" _type="Output" id="Metadata3">
+<Record fieldDelimiter="|" name="__singleDimensionalCollection_1" recordDelimiter="&#10;" type="delimited">
+<Field __artificialType="_id" __systemManaged="true" name="__id" type="string"/>
+<Field __artificialType="_parent_id" __systemManaged="true" name="__parent_id" type="string"/>
+<Field __sourcePath="{}/object/orderItems/item/manufacturer" containerType="" label="manufacturer" name="manufacturer" type="string"/>
+<Field __sourcePath="{}/object/orderItems/item/name" containerType="" label="name" name="name" type="string"/>
+<Field __sourcePath="{}/object/orderItems/item/productId" containerType="" label="productId" name="productId" type="string"/>
+<Field __sourcePath="{}/object/orderItems/item/purchaseReceipt/id" containerType="" label="id" name="id" type="string"/>
+<Field __sourcePath="{}/object/orderItems/item/purchaseReceipt/status" containerType="" label="status" name="status" type="string"/>
+<Field __sourcePath="{}/object/orderItems/item/purchaseReceipt/totalPrice" containerType="" label="totalPrice" name="totalPrice" type="number"/>
+<Field __sourcePath="{}/object/orderItems/item/quantity" containerType="" label="quantity" name="quantity" type="string"/>
+</Record>
+</Metadata>
+<Dictionary>
+<Entry id="DictionaryEntry0" input="true" name="inputPayload" output="false" type="object"/>
+<Entry id="DictionaryEntry1" input="false" name="outputPayload" output="true" type="object"/>
+</Dictionary>
+</Global>
+<Phase number="0">
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:outputPayload" guiHeight="0" guiName="JSON Writer" guiWidth="0" guiX="460" guiY="20" id="JSON_WRITER0" type="JSON_WRITER">
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<object xmlns:clover="http://www.cloveretl.com/ns/xmlmapping" clover:inPort="0">
+  <orderId>$0.orderId</orderId>
+  <customer>
+    <firstName>$0.firstName</firstName>
+    <lastName>$0.lastName</lastName>
+    <address>$0.address</address>
+  </customer>
+  <clover:collection clover:name="orderItems">
+    <item clover:inPort="1" clover:key="__parent_id" clover:parentKey="__id">
+      <item>
+        <manufacturer>$1.manufacturer</manufacturer>
+        <name>$1.name</name>
+        <productId>$1.productId</productId>
+        <purchaseReceipt>
+          <id>$1.id</id>
+          <status>$1.status</status>
+          <totalPrice>$1.totalPrice</totalPrice>
+        </purchaseReceipt>
+        <quantity>$1.quantity</quantity>
+      </item>
+    </item>
+  </clover:collection>
+</object>]]></attr>
+<attr name="_data_format"><![CDATA[JSON]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="order_to_object" guiWidth="0" guiX="240" guiY="20" id="REFORMAT0" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+$out.0.__id=$in.0.__id;
+	$out.0.orderId=$in.0.orderId;
+	$out.0.address=$in.0.address;
+	$out.0.firstName=$in.0.firstName;
+	$out.0.lastName=$in.0.lastName;
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node enabled="enabled" guiHeight="0" guiName="item_to_orderItems" guiWidth="0" guiX="240" guiY="120" id="REFORMAT1" type="REFORMAT">
+<attr name="transform"><![CDATA[//#CTL2
+
+// Transforms input record into output record.
+function integer transform() {
+$out.0.__id=$in.0.__id;
+	$out.0.__parent_id=$in.0.__parent_id;
+	$out.0.manufacturer=$in.0.manufacturer;
+	$out.0.name=$in.0.name;
+	$out.0.productId=$in.0.productId;
+	$out.0.quantity=(isnull($in.0.quantity) ? "" : num2str($in.0.quantity));
+		return ALL;
+}
+
+// Called during component initialization.
+// function boolean init() {}
+
+// Called during each graph run before the transform is executed. May be used to allocate and initialize resources
+// required by the transform. All resources allocated within this method should be released
+// by the postExecute() method.
+// function void preExecute() {}
+
+// Called only if transform() throws an exception.
+// function integer transformOnError(string errorMessage, string stackTrace) {}
+
+// Called during each graph run after the entire transform was executed. Should be used to free any resources
+// allocated within the preExecute() method.
+// function void postExecute() {}
+
+// Called to return a user-defined error message when an error occurs.
+// function string getMessage() {}
+]]></attr>
+</Node>
+<Node charset="UTF-8" enabled="enabled" fileURL="dict:inputPayload" guiHeight="0" guiName="XML Reader" guiWidth="0" guiX="20" guiY="20" id="XML_READER0" type="XML_READER">
+<attr name="xmlSchemaURL"><![CDATA[/Users/nialdarbey/DemoWorkspace/Order WebService/src/test/resources/order.xsd]]></attr>
+<attr name="mapping"><![CDATA[<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context outPort="0" sequenceField="__id" xpath="/order">
+  <Mapping cloverField="orderId" trim="true" xpath="orderId"/>
+  <Mapping cloverField="address" trim="true" xpath="customer/address"/>
+  <Mapping cloverField="firstName" trim="true" xpath="customer/firstName"/>
+  <Mapping cloverField="lastName" trim="true" xpath="customer/lastName"/>
+  <Context generatedKey="__parent_id" outPort="1" parentKey="__id" sequenceField="__id" xpath="orderItems/item">
+    <Mapping cloverField="manufacturer" trim="true" xpath="manufacturer"/>
+    <Mapping cloverField="name" trim="true" xpath="name"/>
+    <Mapping cloverField="productId" trim="true" xpath="productId"/>
+    <Mapping cloverField="quantity" trim="true" xpath="quantity"/>
+  </Context>
+</Context>
+]]></attr>
+<attr name="_data_format"><![CDATA[XML]]></attr>
+</Node>
+<Edge debugMode="true" fromNode="REFORMAT0:0" guiBendpoints="" id="Edge1" inPort="Port 0 (in)" metadata="Metadata2" outPort="Port 0 (out)" toNode="JSON_WRITER0:0"/>
+<Edge debugMode="true" fromNode="REFORMAT1:0" guiBendpoints="" id="Edge3" inPort="Port 1 (in)" metadata="Metadata3" outPort="Port 0 (out)" toNode="JSON_WRITER0:1"/>
+<Edge debugMode="true" fromNode="XML_READER0:0" guiBendpoints="" id="Edge0" inPort="Port 0 (in)" metadata="Metadata0" outPort="Port 0 (out)" toNode="REFORMAT0:0"/>
+<Edge debugMode="true" fromNode="XML_READER0:1" guiBendpoints="" id="Edge2" inPort="Port 0 (in)" metadata="Metadata1" outPort="Port 1 (out)" toNode="REFORMAT1:0"/>
+</Phase>
+</Graph>

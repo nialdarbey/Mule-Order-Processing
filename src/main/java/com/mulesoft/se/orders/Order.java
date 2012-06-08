@@ -1,5 +1,6 @@
 package com.mulesoft.se.orders;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -15,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Order {
+public class Order implements Serializable {
 
 	@XmlElement(name = "orderId")
 	private String orderId;
@@ -24,9 +25,10 @@ public class Order {
 	@XmlElement(name = "customer")
 	private OrderPerson customer;
 
-	/** List of items on an order */
+	/** List of orderItems on an order */
+	@XmlElementWrapper(name="orderItems")
 	@XmlElement(name = "item")
-	private List<OrderItem> items;
+	private List<OrderItem> orderItems;
 
 	public String getOrderId() {
 		return orderId;
@@ -44,11 +46,11 @@ public class Order {
 		this.customer = customer;
 	}
 
-	public List<OrderItem> getItems() {
-		return items;
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
 	}
 
-	public void setItems(List<OrderItem> items) {
-		this.items = items;
+	public void setOrderItems(List<OrderItem> items) {
+		this.orderItems = items;
 	}
 }

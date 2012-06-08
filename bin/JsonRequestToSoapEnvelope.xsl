@@ -1,14 +1,12 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-	xmlns:saxon="http://saxon.sf.net/" xmlns:soap="net.sf.kernow.soapextension.SOAPExtension"
-	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ord="http://orders.se.mulesoft.com/"
 	version="2.0" exclude-result-prefixes="xs">
 	<xsl:output indent="yes" />
-	<xsl:param name="request" />
 	<xsl:template match="/">
-		<soapenv:Envelope xmlns:ord="http://orders.se.mulesoft.com/">
+		<soapenv:Envelope >
 			<soapenv:Body>
 				<ord:processOrder>
-					<xsl:value-of select="$request" />
+					<xsl:copy-of select="order" />
 				</ord:processOrder>
 			</soapenv:Body>
 		</soapenv:Envelope>

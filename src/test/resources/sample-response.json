@@ -1,0 +1,35 @@
+{ 	
+	"orderId" : "123", 
+	"customer" : { 
+		"firstName": "Nial", 
+		"lastName" : "Darbey", 
+		"address" : "Buenos Aires" 
+	}, 
+	"orderItems": [
+		{
+		"item" : {
+			"manufacturer" : "Samsung",
+			"name" : "Galaxy",
+			"productId" : "i9000",
+			"purchaseReceipt" : {
+				"id" : "1",
+				"status" : "ACCEPTED",
+				"totalPrice" : 2550.0
+			},
+			"quantity" : "30"
+		}},
+		{
+		"item" : {
+			"manufacturer" : "Philips",
+			"name" : "P3123",
+			"productId" : "23",
+			"purchaseReceipt" : {
+				"id" : "1",
+				"status" : "ACCEPTED",
+				"totalPrice" : 2550.0
+			},
+			"quantity" : "10"
+		}
+		}	
+	]
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="order" type="orderType"/>
+  <xs:complexType name="customerType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="address"/>
+      <xs:element type="xs:string" name="firstName"/>
+      <xs:element type="xs:string" name="lastName"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="orderType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="orderId"/>
+      <xs:element type="customerType" name="customer"/>
+      <xs:element type="orderItemsType" name="orderItems"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="itemType">
+    <xs:sequence>
+      <xs:element name="manufacturer">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="Samsung"/>
+            <xs:enumeration value="Philips"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element name="name" type="xs:string" />
+      <xs:element name="productId" type="xs:string" />
+      <xs:element name="quantity" type="xs:integer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="orderItemsType">
+    <xs:sequence>
+      <xs:element type="itemType" name="item" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

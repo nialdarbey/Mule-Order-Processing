@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:ajax="http://www.mulesoft.org/schema/mule/ajax" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:jersey="http://www.mulesoft.org/schema/mule/jersey" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:jdbc="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:debugger="http://www.mulesoft.org/schema/mule/debugger" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:jbossts="http://www.mulesoft.org/schema/mule/jbossts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.0" xsi:schemaLocation="
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:ajax="http://www.mulesoft.org/schema/mule/ajax" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:smtp="http://www.mulesoft.org/schema/mule/smtp" xmlns:jersey="http://www.mulesoft.org/schema/mule/jersey" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:vm="http://www.mulesoft.org/schema/mule/vm" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:jdbc="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:debugger="http://www.mulesoft.org/schema/mule/debugger" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:jbossts="http://www.mulesoft.org/schema/mule/jbossts" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.0" xsi:schemaLocation="
 http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
 http://www.mulesoft.org/schema/mule/ajax http://www.mulesoft.org/schema/mule/ajax/current/mule-ajax.xsd 
 http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
 http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd 
 http://www.mulesoft.org/schema/mule/smtp http://www.mulesoft.org/schema/mule/smtp/current/mule-smtp.xsd 
 http://www.mulesoft.org/schema/mule/jersey http://www.mulesoft.org/schema/mule/jersey/current/mule-jersey.xsd 
 http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/3.2/mule-data-mapper.xsd 
 http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
-http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd 
 http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
 http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd 
 http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
 http://www.mulesoft.org/schema/mule/debugger http://www.mulesoft.org/schema/mule/debugger/current/mule-debugger.xsd 
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd 
 http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd 
 http://www.mulesoft.org/schema/mule/jbossts http://www.mulesoft.org/schema/mule/jbossts/current/mule-jbossts.xsd ">
+    <jms:activemq-xa-connector name="Active_MQ" brokerURL="vm://localhost" validateConnections="true" doc:name="Active MQ"/>
     <ajax:connector name="ajaxServer" serverUrl="http://0.0.0.0:8090/orders" resourceBase="${app.home}/docroot" doc:name="ajaxServer"/>
     <cxf:configuration initializeStaticBusInstance="false" doc:name="CXF Configuration" doc:description="Global CXF Configuration"/>
     <data-mapper:config name="OrderItemToOrderRequest" transformationGraphPath="orderitemtoorderrequest_1.grf" doc:name="OrderItemToOrderRequest"/>
@@ -36,25 +38,50 @@ http://www.mulesoft.org/schema/mule/jbossts http://www.mulesoft.org/schema/mule/
     <ee:object-store-caching-strategy name="Caching_Strategy" keyGenerationExpression="#[payload.productId]" doc:name="Caching Strategy">
         <in-memory-store/>
     </ee:object-store-caching-strategy>
+    <mulexml:namespace-manager includeConfigNamespaces="true">  
+        <mulexml:namespace prefix="soap" uri="http://schemas.xmlsoap.org/soap/envelope/"/>  
+        <mulexml:namespace prefix="ord" uri="http://orders.se.mulesoft.com/"/> 
+    </mulexml:namespace-manager>
+    <data-mapper:config name="Json to Xml" transformationGraphPath="json_to_xml.grf" doc:name="Json to Xml"/>
+    <data-mapper:config name="Json to Xml" transformationGraphPath="json_to_xml.grf" doc:name="Json to Xml"/>
+    <data-mapper:config name="Json to Xml" transformationGraphPath="json_to_xml.grf" doc:name="Json to Xml"/>
+    <data-mapper:config name="orderSummary to Json" transformationGraphPath="ordersummary_to_json.grf" doc:name="orderSummary to Json"/>
+    <data-mapper:config name="orderSummary to Json" transformationGraphPath="ordersummary_to_json_1.grf" doc:name="orderSummary to Json"/>
+    <data-mapper:config name="orderSummary to Json" transformationGraphPath="ordersummary_to_json_2.grf" doc:name="orderSummary to Json"/>
+    <data-mapper:config name="orderSummaryToJson" transformationGraphPath="ordersummarytojson.grf" doc:name="orderSummaryToJson"/>
+    <data-mapper:config name="orderSummaryToJson" transformationGraphPath="ordersummarytojson_1.grf" doc:name="orderSummaryToJson"/>
     <flow name="manufacturers" doc:name="manufacturers">
         <ajax:inbound-endpoint channel="/orders/manufacturers" responseTimeout="10000" connector-ref="ajaxServer" doc:name="/orders/manufacturers"/>
         <expression-transformer expression="#['[&quot;Samsung&quot;,&quot;Philips&quot;,&quot;Sony&quot;]']" doc:name="Create Manufacturers"/>
     </flow>
     <flow name="orderRequest" doc:name="orderRequest">
         <ajax:inbound-endpoint channel="/orders/request" responseTimeout="10000" doc:name="/orders/request"/>
-        <json:json-to-object-transformer doc:name="JSON to Object"/>
-        <mulexml:object-to-xml-transformer doc:name="Object to XML"/>
-        <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="JsonRequestToSoapEnvelope.xsl" doc:name="Xml to Soap Envelope">
-            <mulexml:context-property key="request" value="#[payload]"/>
-        </mulexml:xslt-transformer>
+        <data-mapper:transform config-ref="Json to Xml" doc:name="Data-mapper"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="JsonRequestToSoapEnvelope.xsl" doc:name="Xml to Soap Envelope"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <logger message="#[payload:]" level="INFO" doc:name="Logger"/>
         <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="1080" path="orders" doc:name="/orders"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <mulexml:xslt-transformer maxIdleTransformers="2" maxActiveTransformers="5" xsl-file="SoapEnvelopeToBodyChild.xslt" doc:name="Xml to Soap Envelope"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <data-mapper:transform config-ref="orderSummaryToJson" doc:name="Data-mapper"/>
+        <logger message="HERE IS THE TRANSFORMED XML #[payload:]" level="ERROR" doc:name="Logger"/>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <logger message="Herere she is….. #[payload:]" level="ERROR" doc:name="Logger"/>
+    </flow>
+    <flow name="orderProxy" doc:name="orderProxy">
+        <ajax:inbound-endpoint channel="/orders/soap" responseTimeout="10000" doc:name="/orders/soap"/>
+        <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="1080" path="orders" doc:name="/orders"/>
+        <object-to-string-transformer doc:name="Object to String"/>
     </flow>
     <flow name="orderService" doc:name="orderService">
         <http:inbound-endpoint exchange-pattern="request-response" host="localhost" port="1080" path="orders" doc:name="/orders" doc:description="Process HTTP reqests or responses."/>
         <cxf:jaxws-service serviceClass="com.mulesoft.se.orders.IProcessOrder" doc:name="Order WebService" doc:description="Make a web service available via CXF"/>
+        <logger message="#[payload.toString()] #[payload.getClass()]" level="INFO" doc:name="Logger"/>
         <set-session-variable variableName="totalValue" value="0" doc:name="totalValue = 0"/>
-        <foreach collection="#[payload.items]" doc:name="For each Order Item">
-            <enricher target="#[rootMessage.payload.items[counter - 1].purchaseReceipt]" doc:name="Enrich with purchase receipt">
+        <foreach collection="#[payload.orderItems]" doc:name="For each Order Item">
+            <enricher target="#[rootMessage.payload.orderItems[counter - 1].purchaseReceipt]" doc:name="Enrich with purchase receipt">
                 <choice doc:name="Choice">
                     <when expression="#[payload.manufacturer == 'Samsung']">
                         <processor-chain>
@@ -63,7 +90,7 @@ http://www.mulesoft.org/schema/mule/jbossts http://www.mulesoft.org/schema/mule/
                     </when>
                     <otherwise>
                         <processor-chain>
-                            <vm:outbound-endpoint exchange-pattern="request-response" path="inhouseOrder" doc:name="Dispatch to inhouseOrder"/>
+                            <jms:outbound-endpoint exchange-pattern="request-response" queue="inhouseOrder" connector-ref="Active_MQ" doc:name="Dispatch to inhouseOrder"/>
                         </processor-chain>
                     </otherwise>
                 </choice>
@@ -98,7 +125,9 @@ return receipt;]]></scripting:text>
         <http:outbound-endpoint exchange-pattern="request-response" host="localhost" port="9090" path="samsung/orders" doc:name="/samsung/orders"/>
     </sub-flow>
     <flow name="inhouseOrder" doc:name="inhouseOrder">
-        <vm:inbound-endpoint exchange-pattern="request-response" path="inhouseOrder" doc:name="VM"/>
+        <jms:inbound-endpoint queue="inhouseOrder" connector-ref="Active_MQ" doc:name="inhouseOrder">
+            <xa-transaction action="ALWAYS_BEGIN"/>
+        </jms:inbound-endpoint>
         <set-variable variableName="price" value="0" doc:name="Initialise Price"/>
         <enricher target="#[price]" doc:name="Enrich with price">
             <ee:cache cachingStrategy-ref="Caching_Strategy" doc:name="Cache the Price">
@@ -107,6 +136,7 @@ return receipt;]]></scripting:text>
             </ee:cache>
         </enricher>
         <jdbc:outbound-endpoint exchange-pattern="one-way" queryKey="insertOrder" queryTimeout="-1" connector-ref="JDBCConnector" doc:name="Save Order Item">
+            <xa-transaction action="ALWAYS_JOIN"/>
             <jdbc:query key="insertOrder" value="insert into orders (product_id, name, manufacturer, quantity, price) values (#[payload.productId], #[payload.name], #[payload.manufacturer], #[payload.quantity], #[price])"/>
         </jdbc:outbound-endpoint>
         <set-variable variableName="totalPrice" value="#[price * payload.quantity]" doc:name="totalPrice = price * payload.quantity"/>
@@ -118,7 +148,10 @@ return receipt;]]></scripting:text>
             </scripting:script>
         </scripting:transformer>
         <rollback-exception-strategy maxRedeliveryAttempts="3" doc:name="Rollback Exception Strategy">
-            <logger level="INFO" doc:name="Logger"/>
+            <logger message="#[payload:]" level="INFO" doc:name="Logger"/>
+            <on-redelivery-attempts-exceeded doc:name="Redilivery exhausted">
+                <flow-ref name="defaultErrorHandler" doc:name="Invoke defaultErrorHandler"/>
+            </on-redelivery-attempts-exceeded>
         </rollback-exception-strategy>
     </flow>
     <flow name="auditService" doc:name="auditService">

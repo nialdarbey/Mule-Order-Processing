@@ -1,6 +1,7 @@
 package com.mulesoft.se.orders;
 
-import javax.xml.bind.annotation.XmlElement;
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -9,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Derek
  */
 @XmlRootElement
-public class OrderItem {
+public class OrderItem implements Serializable {
 
 	/** Item number */
 	private String productId;
