@@ -1,0 +1,25 @@
+
+<html>
+<head>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!-- see: http://softwaremaniacs.org/soft/highlight/en/ -->
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.0/styles/googlecode.min.css">
+    <script src="http://yandex.st/highlightjs/7.0/highlight.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(function() {
+            var escapeXmlTags = function(str) {
+                return str.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+            }
+            var xml = "<!DOCTYPE html>\n<body>\n\t<h1>Hola Nial!!! - Soporte para &aacute;&eacute; &amp; &lt;&gt; </h1>\n</body>";
+
+
+            $('#response').html(escapeXmlTags(xml));
+            hljs.highlightBlock($('#response').get(0));
+        });
+    </script>
+</head>
+<body>
+<pre id="response" class="xml"></pre>
+</body>
+</html>
